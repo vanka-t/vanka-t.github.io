@@ -22,7 +22,8 @@ body{
 /*Text settings customized to be similar to Google search results!!*/
 .searchResults {
     position: relative;
-
+    display:inline-block; 
+    vertical-align:top;
   }
 #articleTitle {
     color: #190DAC;
@@ -35,7 +36,7 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 200px;
     align-self: auto;
-    float: left; 
+    /*float: left; */
   }
 #normalText {
     color: rgb(61, 61, 61);
@@ -50,7 +51,7 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 200px;
     align-self: auto;  
-    float: left; 
+    /*float: left; */
 }
 #urlHandle {
     text-decoration: gray;
@@ -60,7 +61,7 @@ body{
     right: 50px;
     font-family: Arial, Helvetica, sans-serif;
     align-self: auto;
-    float: left; 
+    /*float: left; */
 }
 
 
