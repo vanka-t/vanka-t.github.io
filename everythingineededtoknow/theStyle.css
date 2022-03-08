@@ -2,10 +2,12 @@
 
 body{
 	background-color: white;
-  	padding-top: 0px;
+  	padding-top: 140px;
   	display: flex;
   	justify-content: center;
+  	
 }
+
 .dropdownMenu{
 	align-items: center;
 	max-width: 200px;
@@ -14,12 +16,70 @@ body{
 	font-size: 20px;
 	margin-left: 30%;
 	min-height: 150px;
-   
 }
+
 .dropdownMenu select{
 	width: 200%;
 }
-/*Text settings customized to be similar to Google search results!!*/
+
+h1 {
+	text-align: center;
+	margin-top: auto;
+	font-size: 35px;
+	font-family: serif;
+}
+
+/*typewriter effect from https://css-tricks.com/snippets/css/typewriter-effect/*/
+
+/*h1 for the landing page*/
+.typewriter h1{
+	overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+	white-space: nowrap; /* Keeps the content on a single line */
+	margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+	letter-spacing: .10em; /* Adjust as needed */
+	animation: 
+	  typing 3.5s steps(40, end),
+	  blink-caret .75s step-end infinite;
+	}
+
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
+}
+
+/*/*css for previous and next button from https://www.w3schools.com/howto/howto_css_next_prev.asp*/
+/*a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 0;
+}
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+.previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+.next {
+  background-color: #05AA8D;
+  color: black;
+}
+.round {
+  border-radius: 50%;
+}
+*/
+
+/*Text settings customized to be similar to Google search results!! VANESSA PART*/
 .searchResults {
     position:relative;
 
@@ -66,65 +126,46 @@ body{
 
 
 
-.title h1 {
-	text-align: center;
-	margin-top: 150px;
-	font-size: 40px;
-	font-family: sans-serif;
+.maincontainer{
+	margin:0;
+  padding:0;
+  display:flex;
+  justify-content: center;
+  width: auto;
+  height:100vh;
 }
 
-/*typewriter effect from https://css-tricks.com/snippets/css/typewriter-effect/*/
+/*.box1{
+	position: absolute;
+}*/
 
-.typewriter h1{
-	overflow: hidden; /* Ensures the content is not revealed until the animation */
-  	border-right: .15em solid orange; /* The typwriter cursor */
-	white-space: nowrap; /* Keeps the content on a single line */
-	margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-	letter-spacing: .10em; /* Adjust as needed */
-	animation: 
-	  typing 3.5s steps(40, end),
-	  blink-caret .75s step-end infinite;
-	}
-
-/* The typing effect */
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+/*previous and next buttons bless this individual https://github.com/JoyZhu219/joy.github.io/blob/main/week006/Net.Art.css*/
+.buttonInfo{
+	width: 100vw;
+	height: 5vh;
+	z-index: 100;
 }
 
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: orange; }
+/*helped with the fixed positioning https://www.w3schools.com/css/tryit.asp?filename=trycss_position_fixed*/
+.buttonInfo {
+	position: fixed;
+	top: 5px;
+	left: 5 px;
 }
 
-/*css for previous and next button from https://www.w3schools.com/howto/howto_css_next_prev.asp*/
-a {
+.buttonInfo .button{
+  color: black;
   text-decoration: none;
-  display: inline-block;
-  padding: 8px 16px;
+  margin: 20px;
+  padding: 15px;
+  position: relative;
+  bottom: 0;
+  margin-top: 10px;
+  margin-left: 10px;
+
 }
 
-a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.previous {
-  background-color: #f1f1f1;
-  color: black;
-}
-
-.next {
-  background-color: #05AA8D;
-  color: white;
-}
-
-.round {
-  border-radius: 50%;
-}
-
-/* GOOGLE IMAGE SLIDESHOW INSPIRED BY https://www.w3schools.com/howto/howto_js_lightbox.asp */
+/* GOOGLE IMAGE SLIDESHOW INSPIRED BY https://www.w3schools.com/howto/howto_js_lightbox.asp VANESSA PART*/
 /* The grid: Four equal columns that floats next to each other */
 .column {
     float: left;
@@ -175,3 +216,10 @@ a:hover {
     font-size: 45px;
     cursor: pointer;
   }
+
+/*got from awesome font website which I got from https://github.com/JoyZhu219/joy.github.io/blob/main/week006/Net.Art.css*/
+
+i {
+	color: black;
+	font-size: 1.2rem;
+}
