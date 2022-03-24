@@ -27,3 +27,15 @@ div {
     width: 50%;
   }
 
+
+h1 {
+	text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+	font-size: 35px;
+	font-family: serif;
+    color: red;
+}
+
+
