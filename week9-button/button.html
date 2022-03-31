@@ -10,18 +10,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     </head>
     <header><h3>How fast can you click before taco man falls?</h3></header>
-    <body>
+    <body id="bg">
+        <p id="msg"> </p>
         <main>
           <div class = timer>
-            <img src ="taco.gif"/>
+            <img id="taco" src ="taco.gif"/>
           </div>
           <div class="container">
-            <h1>Counter</h1>
+            <h1 >Counter</h1>
+            
               <h1 class="counter-display">(..)</h1>
               <button class="counter-plus">+</button>
               <button class ="reset">reset</button>
+
           </div>
         </main>
-        <script src="button.js"></script>
+        <script src="theButton.js"></script>
     </body>
   </html>
