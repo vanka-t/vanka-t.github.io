@@ -9,7 +9,7 @@ var line = document.querySelector("#msg");
 var taco = document.querySelector("#taco");
 var text5 = document.createTextNode("Keep on going!");
 var text10 = document.createTextNode("You did it!!!!");
-var text0 = document.createTextNode("Try Again!");
+var text0 = document.createTextNode("");
 
 updateDisplay();
 
