@@ -3,14 +3,22 @@ body {
     background-color: beige;
     background-repeat: no-repeat;
 }
+
+
 .bgChange1 {
     background-color: #39D3AA;
     
 }
 .bgChange2 {
-    background-image: url("confetti.gif");
+   
+    background-color: #80CB77;
     background-size: cover;
 }
+
+.bgChange0 {
+    background-color: beige;
+}
+
 h3{
     font-family: 'Press Start 2P', cursive;
      text-align: center;

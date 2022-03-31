@@ -9,6 +9,7 @@ var line = document.querySelector("#msg");
 var taco = document.querySelector("#taco");
 var text5 = document.createTextNode("Keep on going!");
 var text10 = document.createTextNode("You did it!!!!");
+var text0 = document.createTextNode("Try Again!");
 
 updateDisplay();
 
@@ -22,9 +23,16 @@ counterPlusElem.addEventListener("click",()=>{
     }
     if (count === 10){
         document.querySelector('#bg').classList.add('bgChange2');
-        document.querySelector('#taco').src="happy-taco.gif";
+        document.querySelector('#taco').src="final-taco.gif";
         line.removeChild(text5) 
         line.appendChild(text10);
+        
+    }
+    if (count === 0){
+        document.querySelector('#bg').classList.add('bgChange0');
+        document.querySelector('#taco').src="taco.gif";
+        line.removeChild(text10)
+        line.appendChild(text0); 
         
     }
 });
@@ -32,7 +40,12 @@ counterPlusElem.addEventListener("click",()=>{
 resetButton.addEventListener("click", ()=>{
     count = 0
     updateDisplay();
+    document.querySelector('#bg').classList.add('bgChange0');
+        document.querySelector('#taco').src="taco.gif";
+        line.removeChild(text10)
+        line.appendChild(text0); 
 });
+
 function updateDisplay(){
     counterDisplayElem.innerHTML = count;
     
