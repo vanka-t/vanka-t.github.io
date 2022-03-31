@@ -18,10 +18,16 @@ counterPlusElem.addEventListener("click",()=>{
     count++;
     updateDisplay();
     if (count === 5){
+        document.querySelector('#bg').classList.remove('bgChange0');
+        document.querySelector('#bg').classList.remove('bgChange2');
         document.querySelector('#bg').classList.add('bgChange1');
+        
         line.appendChild(text5);
     }
     if (count === 10){
+        
+        document.querySelector('#bg').classList.remove('bgChange2');
+        document.querySelector('#bg').classList.remove('bgChange1');
         document.querySelector('#bg').classList.add('bgChange2');
         document.querySelector('#taco').src="final-taco.gif";
         line.removeChild(text5) 
@@ -29,12 +35,14 @@ counterPlusElem.addEventListener("click",()=>{
         
     }
     if (count === 0){
+        document.querySelector('#bg').classList.remove('bgChange2');
         document.querySelector('#bg').classList.add('bgChange0');
         document.querySelector('#taco').src="taco.gif";
         line.removeChild(text10)
         line.appendChild(text0); 
         
     }
+    updateDisplay();
 });
  
 resetButton.addEventListener("click", ()=>{
