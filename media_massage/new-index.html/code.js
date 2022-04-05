@@ -6,6 +6,7 @@ let count = 0;
  
 var line = document.querySelector("#msg");
 var pics1 = document.querySelector("#pic1");
+var pics2 = document.querySelector("#pic2");
 
 updateDisplay();
 
@@ -24,7 +25,7 @@ counterPlusElem.addEventListener("click",()=>{
         document.querySelector('#bg').classList.remove('bgChange2');
         document.querySelector('#bg').classList.remove('bgChange1');
         document.querySelector('#bg').classList.add('bgChange2');
-        document.querySelector('#pic1').src="bg1.png";
+        document.querySelector('#pic1').src="bg2.png";
       
         
     }
@@ -34,20 +35,13 @@ counterPlusElem.addEventListener("click",()=>{
     if (count === 0){
         document.querySelector('#bg').classList.remove('bgChange2');
         document.querySelector('#bg').classList.add('bgChange0');
-        document.querySelector('#pic1').src="bg1.png";
+        document.querySelector('#pic1').src="2.png";
       
         
     }
     updateDisplay();
 });
  
-resetButton.addEventListener("click", ()=>{
-    count = 0
-    updateDisplay();
-    document.querySelector('#bg').classList.add('bgChange0');
-        document.querySelector('#pic1').src="bg1.png";
-        
-});
 
 function updateDisplay(){
 
