@@ -12,7 +12,9 @@ function startTimer(duration, display) {
         display.textContent = minutes + ":" + seconds;
 
         if (--timer < 0) {
-            timer = duration;
+            
+            gameOver();
+            timer = duration; //ideally have it freeze
 
             //FLASH GAME OVER AND RESET BUTTON HERE gameOver()
 
@@ -21,11 +23,12 @@ function startTimer(duration, display) {
 }
 
 window.onload = function () {
-    var oneMinute = 60,
+    var oneMinute = 5,//60,
         display = document.querySelector('#time');
     startTimer(oneMinute, display);
 };
 
 function gameOver(){
+    document.querySelector('#bg').classList.add('bgChange0');
 
 }
