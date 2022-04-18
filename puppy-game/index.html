@@ -3,23 +3,66 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-      
+       <!--
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Gorditas:wght@700&display=swap');
+        </style>        
+       --> 
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Gorditas&display=swap');
+        </style>
+        
         <link rel="stylesheet" href="style.css">
     
     </head>
-    <body style="background-color: black; background-image: url(https://cutewallpaper.org/21/space-wallpaper-gif/Free-download-red-planet-wallpaper-hd-memestrendingspace-.gif);">
+    <body id="bg">
        
-      
-        <div id="bg"  > 
+      <div class="modal-container" id="start-container">
+          <div class="modal">
+              <h1> Welcome!</h1>
+              <p> Feed the puppy the correct snacks before lunch time ends.</p>
+              <button id="startButton">
+                  Start game
+              </button>
+          </div>
+
+      </div>
+        <div   > 
         
-            <div style="background-color: red;" class="stopWatch">1000</div>
-            <p id="demo"></p>
+            <!--<div style="background-color: red;" class="stopWatch">1000</div> <p id="demo"></p>-->
+            
 
-            <div style="background-color: red;"> <span id="time">01:00</span> </div>
+            <!--<div class="timer" > <span id="time">30</span> </div> -->
+            <div class="score-timer-modal"> 
+                <h1> Time:</h1>
+                <div id="time" class="timer">
+                    
+                    30
 
-           
-            <button class="startButton">Start</button>
-            <button class="resetButton">Reset</button>
+                </div> 
+                <div  >
+
+                </div> 
+            </div>
+             
+               
+                
+                
+            </div> 
+
+        </div>
+        
+               <div class="modal-container" id="reset-container">
+            <div class="modal">
+                <h1> Game Over</h1>
+                <p> Time is up! Better luck next time.</p>
+                <button id="resetButton">
+                    Try again
+                </button>
+            </div>
+
+        
+     
     </body>
     <script src="game.js"></script>
 </html>

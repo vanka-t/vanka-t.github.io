@@ -1,3 +1,82 @@
-.bgChange0 {
-    background-color: beige;
+
+body {
+    
+    background-color: rgb(255, 255, 163);
+    font-family: 'Gorditas';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
 }
+* {
+    box-sizing: border-box;
+}
+
+
+button {
+    background-color: bisque;
+    font-family: 'Gorditas', cursive;
+    border: 20px;
+    border-radius: 100px;
+    font-size: 20px;
+    color: pink;
+    padding: 10px 50px;
+}
+
+
+.gameOver {
+    background-color: #39D3AA;
+}
+
+.timer {
+    color: rgb(255, 28, 229);
+    font-size: 40px;
+}
+.modal-container {
+    /* display: none;*/
+    position:fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.add {
+    pointer-events: auto;
+    opacity: 1;
+}
+.remove {
+    pointer-events: none;
+    opacity: 0;
+
+}
+.modal { /* settings for banner in general */
+    background-color: #39D3AA;
+    font-family: 'Gorditas', cursive;
+    max-width: 100%;
+    border-radius: 15px;
+    height: 50%;
+    width: 40%;
+    text-align: center;
+    
+}
+
+.modal h1{ /* settings for title text inside popup banner */
+    padding-top: 20%;
+    text-align: center;
+    font-size: 35px;
+}
+
+.modal p{ /* settings for title text inside popup banner */
+    text-align: center;
+    font-size: 15px;
+}
+
+/*.reset-container {
+   display: none;
+   position:fixed;
+
+}*/
