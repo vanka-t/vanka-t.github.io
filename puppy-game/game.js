@@ -8,61 +8,93 @@ const startButton = document.getElementById('.startButton');
 const resetContainer = document.getElementById('reset-container');
 const resetButton = document.getElementById('.resetButton');
 
+const winContainer = document.getElementById('win-container');
+const restartButton = document.getElementById('.restartButton');
 
+const timeContainer = document.getElementById('time-container');
+const background = document.getElementById('bg');
+var halfMinute = 9;
+
+window.onload = function () { // this is the main function that calls the chain of functions
+    startGame();
+    console.log("aha");
+    //  --> change here if the seconds of the timer
+   
+    document.querySelector('#bg').classList.add('body');
+
+    
+};
 
 function startGame(){ // start/welcome page with the popup banner
+    timeContainer.classList.add('remove')
+    winContainer.classList.add('remove');
     resetContainer.classList.add('remove');
+    startContainer.classList.add('show');
+    
    startContainer.addEventListener("click", ()=>{ // IF START BUTTON IS CLICKED:
     startContainer.classList.add('remove'); //WELCOME POPUP BANNER IS REMOVED
-        var halfMinute = 30,//  --> change here if the seconds of the timer
+    console.log("hall0000o");
+        //timer = duration; //TIMER STARTS
+        //startTimer(halfMinute, display);
+        
         display = document.querySelector('#time');
+        startContainer.addEventListener("click", ()=>{ 
+            console.log("fyckk");
+        })
+        //scoreCount();
         startTimer(halfMinute, display);
-        timer = duration; //TIMER STARTS
-
         //you'll prolly want to insert your code somewhere *** HERE ***
-    
+       
     });
 }
-
-
-
-function startTimer(duration, display) { //TIMER SETTINGS 
-    var timer = duration, seconds;
-    setInterval(function () {
-        //minutes = parseInt(timer / 60, 10); -->this is optional incase we want to show minutes, otherwise ignore
-        seconds = parseInt(timer % 60, 10);
-
-        //minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        display.textContent = seconds;//minutes + ":" + seconds;
-
-        if (--timer === 0) { //IF TIMER GOES TO 00:00:
-            
-            gameOver();    //SHOW GAME OVER PAGE
-
+function youWin(){
+    timeContainer.classList.remove('show');
+    winContainer.classList.remove('remove');
+    winContainer.classList.add('show');
+    //document.querySelector('#bg').classList.add('youWin');
+    winContainer.addEventListener("click", ()=>{
+       // document.querySelector('#bg').classList.remove('youWin');
+       window.onload();
+       
+        display = document.querySelector('#time');
+        if (display === "00") {
+            display === "10"
         }
-    }, 1000);
+        startTimer(halfMinute, display);
+        //scoreCount(); //enable this when you want to restart code after doing your own settings to it
+        
+       
+    
+    });
 }
 
 function gameOver(){
-
-    resetContainer.classList.add('add');
+    timeContainer.classList.remove('show');
+    timeContainer.classList.add('remove');
+   // document.querySelector('#bg').classList.remove('body');
+   // document.querySelector('#reset-container').classList.add('show');
+    document.querySelector('#bg').classList.add('gameOver');
+    resetContainer.classList.remove('remove');
+    resetContainer.classList.add('show');
     resetContainer.addEventListener("click", ()=>{
-        startGame();
-        count = 0
-       // updateDisplay();
+        document.querySelector('#bg').classList.remove('gameOver');
+       window.onload();
+       //var halfMinute = 5,
+        display = document.querySelector('#time');
+        if (display === "00") {
+            display === "10"
+        }
+        startTimer(halfMinute, display);
+        scoreCount();
         
+       
     
     });
-    
-    document.querySelector('#bg').classList.remove('body');
-    document.querySelector('#bg').classList.add('gameOver');
-
 }
 
-window.onload = function () { // this is the main function that calls the chain of functions
-    startGame()
-    document.querySelector('#bg').classList.add('body');
-};
+
+
+
+
+
 

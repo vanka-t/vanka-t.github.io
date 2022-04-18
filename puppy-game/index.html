@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
        <!--
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Gorditas:wght@700&display=swap');
@@ -16,8 +18,16 @@
     
     </head>
     <body id="bg">
-       
-      <div class="modal-container" id="start-container">
+        <div class="modal-container3" id="win-container">  <!-- GAME OVER BUTTON-->
+            <div class="modal">
+            <h1> Great Job!</h1>
+            <p> The puppy finished all its activities. You did great!!</p>
+            <button id="restartButton">
+                Restart
+            </button>
+            </div>
+        </div>
+      <div class="modal-container" id="start-container">  <!-- START BUTTON-->
           <div class="modal">
               <h1> Welcome!</h1>
               <p> Feed the puppy the correct snacks before lunch time ends.</p>
@@ -25,46 +35,49 @@
                   Start game
               </button>
           </div>
-
       </div>
         <div   > 
         
             <!--<div style="background-color: red;" class="stopWatch">1000</div> <p id="demo"></p>-->
             
-
-            <!--<div class="timer" > <span id="time">30</span> </div> -->
-            <div class="score-timer-modal"> 
+            <div class="timer-modal" id="time-container">   <!-- TIME-->
                 <h1> Time:</h1>
-                <div id="time" class="timer">
-                    
-                    30
-
-                </div> 
-                <div  >
-
-                </div> 
-            </div>
-             
-               
+                <div id="time" class="timer">                  
+                10
+                </div>
+        
+            </div>   
                 
-                
+        </div> 
+
+        <div class="score-modal" id="score-container"> <!-- SCORE-->
+           
+            <h1> Score:</h1>
+            <div id="score" class="timer">
+                 0
             </div> 
-
+           <!-- <div class="timer"> / 50 </div> --> 
+            
+          
         </div>
         
-               <div class="modal-container" id="reset-container">
+        <div class="modal-container2" id="reset-container">  <!-- GAME OVER BUTTON-->
             <div class="modal">
-                <h1> Game Over</h1>
-                <p> Time is up! Better luck next time.</p>
-                <button id="resetButton">
-                    Try again
-                </button>
+            <h1> Game Over</h1>
+            <p> Time is up! Better luck next time.</p>
+            <button id="resetButton">
+                Try again
+            </button>
             </div>
+        </div>
 
-        
+      
+
+       
      
     </body>
     <script src="game.js"></script>
+    <script src="game-settings.js"></script>
 </html>
             
            

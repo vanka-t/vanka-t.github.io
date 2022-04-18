@@ -13,6 +13,44 @@ body {
     box-sizing: border-box;
 }
 
+/*SETTINGS FOR WELCOME + GAME OVER POPUP BANNERS*/
+.modal-container {  /* start game popup*/
+    /* display: none;*/
+    background-color: rgba(0, 0, 0, 0.2);
+    position:fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    height: 100vh;
+    width: 100vw;
+    
+}
+
+.modal-container2 {   /* game over popup*/
+    /* display: none;*/
+    position:fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.modal-container3 {  /* you win popup*/
+    /* display: none;*/
+    background-color: rgba(0, 0, 0, 0.2);
+    position:fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    height: 100vh;
+    width: 100vw;
+    
+}
+
 
 button {
     background-color: bisque;
@@ -29,22 +67,9 @@ button {
     background-color: #39D3AA;
 }
 
-.timer {
-    color: rgb(255, 28, 229);
-    font-size: 40px;
-}
-.modal-container {
-    /* display: none;*/
-    position:fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 1;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.2);
-}
-.add {
+
+
+.show {   
     pointer-events: auto;
     opacity: 1;
 }
@@ -53,6 +78,7 @@ button {
     opacity: 0;
 
 }
+
 .modal { /* settings for banner in general */
     background-color: #39D3AA;
     font-family: 'Gorditas', cursive;
@@ -75,8 +101,43 @@ button {
     font-size: 15px;
 }
 
-/*.reset-container {
-   display: none;
-   position:fixed;
+/*SETTINGS FOR TIMER + SCORE BANNERS*/
+.timer {
+    color: rgb(255, 28, 229);
+    font-size: 40px;
+}
 
-}*/
+.timer-modal {
+    background-color: rgb(138, 255, 245);
+    text-align: center;
+    max-width: 100%;
+    border-radius: 15px;
+    padding-left: 0px;
+    padding-top: 10px;
+    opacity: 1;
+    height: 90%;
+    width: 300px;
+    align-items: left;
+    margin-block-start: 10px;
+    padding-bottom: 20px;
+    margin-top: 550px;
+    margin-right: 350px;
+    
+}
+
+.score-modal {
+    background-color: rgb(138, 255, 245);
+    text-align: center;
+    max-width: 100%;
+    border-radius: 15px;
+    padding-left: 0px;
+    padding-top: 10px;
+    opacity: 1;
+    height: 90%;
+    width: 300px;
+    align-items: left;
+    margin-block-start: 10px;
+    padding-bottom: 20px;
+    margin-top: 550px;
+    margin-left: 350px;
+}
