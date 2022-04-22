@@ -1,7 +1,4 @@
 
-//timer settings
-
-
 const startContainer = document.getElementById('start-container');
 const startButton = document.getElementById('.startButton');
 

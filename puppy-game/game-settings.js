@@ -1,6 +1,4 @@
 // this is where the timer and score settings are 
-
-
 function scoreCount(){ //SCORE COUNTING SETTINGS
     console.log("waweeewo");
     var score = 0;
