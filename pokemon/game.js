@@ -67,19 +67,19 @@ function animate() {
             playerImg.height
         )
     //}
-    if (keys.ArrowUp.pressed){ //bckground view goes down
+    if (keys.ArrowUp.pressed && lastKey === 'ArrowUp'){ //bckground view goes down
         background.pos.y += 3
         console.log(" y: " , background.pos.y)
     } 
-    if (keys.ArrowDown.pressed){//bckground view goes up
+    if (keys.ArrowDown.pressed && lastKey === 'ArrowDown'){//bckground view goes up
         background.pos.y -= 3
         console.log(" y: " , background.pos.y)
     } 
-    if (keys.ArrowLeft.pressed){ //bckground view goes left
+    if (keys.ArrowLeft.pressed && lastKey === 'ArrowLeft'){ //bckground view goes left
         background.pos.x += 3
         console.log(" x: " , background.pos.x)
     } 
-    if (keys.ArrowRight.pressed){ //bckground view goes left
+    if (keys.ArrowRight.pressed && lastKey === 'ArrowRight'){ //bckground view goes left
         background.pos.x -= 3
         console.log(" x: " , background.pos.x)
     } 
@@ -91,18 +91,22 @@ window.addEventListener('keydown', (e) => { // === mousePressed
         case 'ArrowUp':
             console.log(" hihi up u go")
             keys.ArrowUp.pressed = true
+            lastKey = 'ArrowUp'
             break
         case 'ArrowDown':
             console.log(" huhu down u go")
             keys.ArrowDown.pressed = true
+            lastKey = 'ArrowDown'
             break
         case 'ArrowLeft':
             console.log(" hehe left u go")
             keys.ArrowLeft.pressed = true
+            lastKey = 'ArrowLeft'
             break
         case 'ArrowRight':
             console.log(" hoho right u go")
             keys.ArrowRight.pressed = true
+            lastKey = 'ArrowRight'
             break
     }
 }) 
