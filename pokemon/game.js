@@ -15,6 +15,49 @@ playerImg.src = 'assets-prova/char2-front.png'
 let lastKey = '' //empty str for memory key
 
 
+const collisionsMap = []
+
+
+for (let i = 0; i<collisions.length; i+= 70){ //70 bc its the map tile width!!
+    
+    collisionsMap.push(collisions.slice(i, i+70))
+}
+
+class Boundary {
+    static width = 48
+    static height = 48
+    constructor({pos}) {
+        this.pos = pos
+        this.width = 48 //pixel size of tiles after zooming in at 400% == 12(original pixels) * 4 (40%)
+        this.height = 48
+    }
+
+    draw() {
+        c.fillStyle = 'blue'
+        c.fillRect(this.pos.x, this.pos.y, this.width, this.y)
+    }
+}
+
+const boundaries = []
+const offset = { //syncing background + collisions pos
+    x: -825,
+    y: -335 
+}
+
+collisionsMap.forEach((row, i ) => {
+    row.forEach((symbol, j) => { //j = index of row currently loopin over
+        if (symbol === 1029)
+            boundaries.push(
+                new Boundary({
+                    pos: {
+                        x: j * Boundary.width + offset.x, //found in static width
+                        y: i * Boundary.height + offset.y
+            }}))
+        
+        
+    })
+})
+console.log(boundaries)
 
 const keys = {
     ArrowUp: {
@@ -30,7 +73,9 @@ const keys = {
         pressed: false
     }
 }
-class Sprite {
+
+
+class Sprite { //character movement
     constructor({pos, velocity, bckground}) {
         this.pos = pos //position
         this.bckground = bckground 
@@ -41,9 +86,10 @@ class Sprite {
     }
 }
 
+
 const background = new Sprite({pos: {
-    x: -825,
-    y: -335 
+    x: offset.x,
+    y: offset.y 
     },
     bckground: bckground
 })
@@ -52,6 +98,9 @@ const background = new Sprite({pos: {
 function animate() {
     window.requestAnimationFrame(animate) 
     background.draw()
+    boundaries.forEach(boundary => {//collisions drawn
+        boundary.draw()
+    }),
    // playerImg.onload = () => {
         c.drawImage(
             playerImg,

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="70" height="40" tilewidth="12" tileheight="12" infinite="0" nextlayerid="10" nextobjectid="1">
  <editorsettings>
-  <export target="collisions map..tmj" format="json"/>
+  <export target="collisions map.tmj" format="json"/>
  </editorsettings>
  <tileset firstgid="1" source="assets-tile/prova.tsx"/>
  <tileset firstgid="1025" source="assets-tile/collisions.tsx"/>
@@ -313,7 +313,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer id="8" name="collisions" width="70" height="40" opacity="0.48">
+ <layer id="8" name="collisions" width="70" height="40" visible="0" opacity="0.48">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1029,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1029,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1029,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1029,1029,0,0,0,0,0,0,0,0,0,0,
