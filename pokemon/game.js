@@ -14,27 +14,16 @@ const playerImg = new Image() //FRONT CHAR
 playerImg.src = 'assets-prova/char2-front.png' 
 let lastKey = '' //empty str for memory key
 
+const foregroundImg = new Image() //FRONT CHAR
+foregroundImg.src = 'assets-prova/foreground.png' 
+
 
 const collisionsMap = []
 for (let i = 0; i<collisions.length; i+= 70){ //70 bc its the map tile width!!
     
     collisionsMap.push(collisions.slice(i, i+70))
 }
-pixels = 40.5 //pixel size of tiles after zooming in at 400% == x(original pixels) * 4 (400%)
-class Boundary {
-    static width = pixels
-    static height = pixels 
-    constructor({position}) {
-        this.position = position
-        this.width = pixels 
-        this.height = pixels 
-    }
 
-    draw() {
-        c.fillStyle = 'black'
-        c.fillRect(this.position.x, this.position.y, this.width,this.height)//this.width, this.height)
-    }
-}
 
 const boundaries = []
 const offset = { //syncing background + collisions pos
@@ -79,37 +68,7 @@ const keys = {
 
 
 
-class Sprite { //character movement
-    constructor({position, velocity, img, frames = {max: 1}}) {
-        this.position = position //position
-        this.img = img 
-        this.frames = frames
-        this.img.onload = () => {
-            this.width = this.img.width / this.frames.max
-            this.height = this.img.height 
-            console.log(this.width, this.height)
 
-        }
-        
-    }
-
-    draw() {
-        //c.drawImage(this.img,this.position.x, this.position.y)// change starting position of background
-        c.drawImage(
-            this.img,
-            //cropping of char.png
-            0, //xpos
-            0, //ypos
-            this.img.width/ this.frames.max,
-            this.img.height,
-            //actual position of char
-            this.position.x,
-            this.position.y,
-            this.img.width/ this.frames.max,
-            this.img.height
-        )
-    }
- }
  // , 
 // ,
 
@@ -131,6 +90,13 @@ const background = new Sprite({position: {
     img: img
 })
 
+const foreground = new Sprite({position: {
+    x: offset.x +55.5, //make sure theyre actually rendered me same zoom in % mf :/
+    y: offset.y +16
+    },
+    img: foregroundImg
+})
+
 
 function rectangularCollision({rect1, rect2}) { //rect1 = player, rect2 = testBoundary
     return (
@@ -140,7 +106,7 @@ function rectangularCollision({rect1, rect2}) { //rect1 = player, rect2 = testBo
         rect1.position.y + rect1.height >= rect2.position.y
     )
 }
-const movables = [background, ...boundaries] //dots help since boundaries is an array within this array (weird syntax)
+const movables = [background, ...boundaries, foreground] //dots help since boundaries is an array within this array (weird syntax)
 function animate() {
     window.requestAnimationFrame(animate) 
     background.draw()
@@ -151,6 +117,7 @@ function animate() {
     
     })
     player.draw()
+    foreground.draw()
     let moving = true 
 
         
