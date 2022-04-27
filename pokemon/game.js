@@ -7,8 +7,8 @@ canvas.height = 576
 c.fillStyle = 'blue'
 c.fillRect(0,0,canvas.width,canvas.height);
 
-const bckground = new Image()
-bckground.src = 'assets-prova/map.png'
+const img = new Image()
+img.src = 'assets-prova/map.png'
 
 const playerImg = new Image() //FRONT CHAR
 playerImg.src = 'assets-prova/char2-front.png' 
@@ -80,71 +80,133 @@ const keys = {
 
 
 class Sprite { //character movement
-    constructor({pos, velocity, bckground}) {
-        this.pos = pos //position
-        this.bckground = bckground 
+    constructor({position, velocity, img, frames = {max: 1}}) {
+        this.position = position //position
+        this.img = img 
+        this.frames = frames
+        this.img.onload = () => {
+            this.width = this.img.width / this.frames.max
+            this.height = this.img.height 
+            console.log(this.width, this.height)
+
+        }
+        
     }
 
-    draw(){
-        c.drawImage(this.bckground,this.pos.x, this.pos.y)// change starting position of background
-    }
-}
-
-
-const background = new Sprite({pos: {
-    x: offset.x,
-    y: offset.y 
-    },
-    bckground: bckground
-})
-
-const testBoundary  = new Boundary({
-    position: {
-        x:400,
-        y:400
-    }
-})
-const movables = [background,testBoundary]
-function animate() {
-    window.requestAnimationFrame(animate) 
-    background.draw()
-    testBoundary.draw()
-
-    // boundaries.forEach(boundary => {//collisions drawn
-    //     boundary.draw()
-    // }),
-   // playerImg.onload = () => {
+    draw() {
+        //c.drawImage(this.img,this.position.x, this.position.y)// change starting position of background
         c.drawImage(
-            playerImg,
+            this.img,
             //cropping of char.png
             0, //xpos
             0, //ypos
-            playerImg.width/4,
-            playerImg.height,
+            this.img.width/ this.frames.max,
+            this.img.height,
             //actual position of char
-            canvas.width/2 - (playerImg.width/4) /2, //precise location for far left sprite in cropped png
-            canvas.height/2 - playerImg.height/2,
-            playerImg.width/4,
-            playerImg.height
+            this.position.x,
+            this.position.y,
+            this.img.width/ this.frames.max,
+            this.img.height
         )
+    }
+ }
+ // , 
+// ,
+
+const player = new Sprite({
+    position:{
+        x: canvas.width/2 - 192 /4/2,//precise location for far left sprite in cropped png (192 = player IMAGE WIDTH)
+        y: canvas.height/2 - 68/2 //68 = IMAGE HEIGHT
+    },
+    img: playerImg,
+    frames: {
+        max: 4
+    }
+})
+
+const background = new Sprite({position: {
+    x: offset.x,
+    y: offset.y 
+    },
+    img: img
+})
+
+
+function rectangularCollision({rect1, rect2}) { //rect1 = player, rect2 = testBoundary
+    return (
+        rect1.position.x + rect1.width >= rect2.position.x && //RIGHT SIDE of player
+        rect1.position.x <= rect2.position.x + rect2.width && //left side of player
+        rect1.position.y <= rect2.position.y + rect2.height && //under player
+        rect1.position.y + rect1.height >= rect2.position.y
+    )
+}
+const movables = [background, ...boundaries] //dots help since boundaries is an array within this array (weird syntax)
+function animate() {
+    window.requestAnimationFrame(animate) 
+    background.draw()
+    
+    
+    boundaries.forEach((boundary) => {//collisions drawn
+        boundary.draw()
+    
+    })
+    player.draw()
+    let moving = true 
+
+        
+
+
+
+
+   // playerImg.onload = () => {
+       
     //}
+    //if (playerImg.position.x + playerImg.width) //right side of player icon
     if (keys.ArrowUp.pressed && lastKey === 'ArrowUp')
     { //bckground view goes down
-        background.pos.y += 3
-        testBoundary.position.y +=3
+        for(let i =0; i< boundaries.length; i++){
+            const boundary = boundaries[i]
+            if ( rectangularCollision ({ //calling dimension for player to boundary collision
+                rect1 : player,
+                rect2: {...boundary, position:{
+                    x: boundary.position.x,
+                    y: boundary.position.x +3 //the +3 detects into the future whether or not were about to collide
+
+                }}
+            })
+            ) { 
+                moving = false
+                break
+                //console.log("player:", player.position.x,player.position.y )
+                //console.log("boundary:", boundary.position.x,boundary.position.y )
+    
+            }
+        }
+        if (moving) {
+            movables.forEach((movable) => {
+                movable.position.y +=3
+            })
+        }
+        
     } 
     if (keys.ArrowDown.pressed && lastKey === 'ArrowDown'){//bckground view goes up
-        background.pos.y -= 3
-        testBoundary.position.y -=3
+        movables.forEach((movable) => {
+            movable.position.y -=3
+        })
+      
     } 
     if (keys.ArrowLeft.pressed && lastKey === 'ArrowLeft'){ //bckground view goes left
-        background.pos.x += 3
-        testBoundary.position.x +=3
+        
+        movables.forEach((movable) => {
+            movable.position.x +=3
+        })
+        
        // console.log(" x: " , background.pos.x)
     } 
     if (keys.ArrowRight.pressed && lastKey === 'ArrowRight'){ //bckground view goes left
-        background.pos.x -= 3
-        testBoundary.position.x -=3
+        movables.forEach((movable) => {
+            movable.position.x -=3
+        })
        // console.log(" x: " , background.pos.x)
     } 
 }
