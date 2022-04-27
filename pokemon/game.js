@@ -170,8 +170,7 @@ function animate() {
                 rect1 : player,
                 rect2: {...boundary, position:{
                     x: boundary.position.x,
-                    y: boundary.position.x +3 //the +3 detects into the future whether or not were about to collide
-
+                    y: boundary.position.y +3 //the +3 detects into the future whether or not were about to collide
                 }}
             })
             ) { 
@@ -179,7 +178,6 @@ function animate() {
                 break
                 //console.log("player:", player.position.x,player.position.y )
                 //console.log("boundary:", boundary.position.x,boundary.position.y )
-    
             }
         }
         if (moving) {
@@ -190,23 +188,78 @@ function animate() {
         
     } 
     if (keys.ArrowDown.pressed && lastKey === 'ArrowDown'){//bckground view goes up
-        movables.forEach((movable) => {
-            movable.position.y -=3
-        })
+        for(let i =0; i< boundaries.length; i++){
+            const boundary = boundaries[i]
+            if ( rectangularCollision ({ //calling dimension for player to boundary collision
+                rect1 : player,
+                rect2: {...boundary, position:{
+                    x: boundary.position.x,
+                    y: boundary.position.y -3 //the +3 detects into the future whether or not were about to collide
+                }}
+            })
+            ) { 
+                moving = false
+                break
+                //console.log("player:", player.position.x,player.position.y )
+                //console.log("boundary:", boundary.position.x,boundary.position.y )
+            }
+        }
+        if (moving) {
+            movables.forEach((movable) => {
+                movable.position.y -=3
+            })
+        }
+  
       
     } 
     if (keys.ArrowLeft.pressed && lastKey === 'ArrowLeft'){ //bckground view goes left
+        for(let i =0; i< boundaries.length; i++){
+            const boundary = boundaries[i]
+            if ( rectangularCollision ({ //calling dimension for player to boundary collision
+                rect1 : player,
+                rect2: {...boundary, position:{
+                    x: boundary.position.x +3,
+                    y: boundary.position.y //the +3 detects into the future whether or not were about to collide
+                }}
+            })
+            ) { 
+                moving = false
+                break
+                //console.log("player:", player.position.x,player.position.y )
+                //console.log("boundary:", boundary.position.x,boundary.position.y )
+            }
+        }
+        if (moving) {
+            movables.forEach((movable) => {
+                movable.position.x +=3
+            })
+        }
         
-        movables.forEach((movable) => {
-            movable.position.x +=3
-        })
         
        // console.log(" x: " , background.pos.x)
     } 
     if (keys.ArrowRight.pressed && lastKey === 'ArrowRight'){ //bckground view goes left
-        movables.forEach((movable) => {
-            movable.position.x -=3
-        })
+        for(let i =0; i< boundaries.length; i++){
+            const boundary = boundaries[i]
+            if ( rectangularCollision ({ //calling dimension for player to boundary collision
+                rect1 : player,
+                rect2: {...boundary, position:{
+                    x: boundary.position.x - 3,
+                    y: boundary.position.y //the +3 detects into the future whether or not were about to collide
+                }}
+            })
+            ) { 
+                moving = false
+                break
+                //console.log("player:", player.position.x,player.position.y )
+                //console.log("boundary:", boundary.position.x,boundary.position.y )
+            }
+        }
+        if (moving) {
+            movables.forEach((movable) => {
+                movable.position.x -=3
+            })
+        }
        // console.log(" x: " , background.pos.x)
     } 
 }
