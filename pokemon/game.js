@@ -32,11 +32,14 @@ foregroundImg.src = 'assets-prova/foreground.png'
 
 
 const collisionsMap = []
-for (let i = 0; i<collisions.length; i+= 70){ //70 bc its the map tile width!!
-    
+for (let i = 0; i<collisions.length; i+= 70){ //70 bc its the map tile width!!  
     collisionsMap.push(collisions.slice(i, i+70))
 }
 
+const battleZoneMap = []
+for (let i = 0; i<battleZoneData.length; i+= 70){ //70 bc its the map tile width!!  
+    battleZoneMap.push(battleZoneData.slice(i, i+70))
+}
 
 const boundaries = []
 const offset = { //syncing background + collisions pos
@@ -47,11 +50,6 @@ const offset = { //syncing background + collisions pos
 collisionsMap.forEach((row, i ) => {
     row.forEach((symbol, j) => { //j = index of row currently loopin over
         if (symbol > 0)  {
-
-        
-        console.log("yeehaw")
-
-            
             boundaries.push(
                 new Boundary({
                     position: {
@@ -62,7 +60,22 @@ collisionsMap.forEach((row, i ) => {
         }
     })
 })
-console.log(boundaries)
+
+const battleZone = []
+battleZoneMap.forEach((row, i ) => {
+    row.forEach((symbol, j) => { //j = index of row currently loopin over
+        if (symbol > 0)  {
+            battleZone.push(
+                new Boundary({
+                    position: {
+                        x: j * Boundary.width + offset.x,// -210, //found in static width //210 is from bad previous programming? ur not supposed to need it but u fucked up somewhere so now ur left addin extra space manually
+                        y: i * Boundary.height + offset.y //-100
+            }}))
+        
+        }
+    })
+})
+console.log(battleZone)
 
 const keys = {
     ArrowUp: {
@@ -126,21 +139,35 @@ function rectangularCollision({rect1, rect2}) { //rect1 = player, rect2 = testBo
         rect1.position.y + rect1.height >= rect2.position.y
     )
 }
-const movables = [background, ...boundaries, foreground] //dots help since boundaries is an array within this array (weird syntax)
+const movables = [background, ...boundaries, foreground, ...battleZone] //dots help since boundaries is an array within this array (weird syntax)
 function animate() {
     window.requestAnimationFrame(animate) 
     background.draw()
     
-    
     boundaries.forEach((boundary) => {//collisions drawn
         boundary.draw()
-    
     })
+
+    battleZone.forEach((battleZone1) => {//collisions drawn
+        battleZone1.draw()
+    })
+
     player.draw()
     foreground.draw()
     let moving = true 
     player.moving = false //by default player doesnt move when staying in place
-
+    if (keys.ArrowUp.pressed || keys.ArrowDown.pressed || keys.ArrowLeft.pressed || keys.ArrowRight.pressed){ //battle zone called when player is in motion on battlezone area
+        for(let i =0; i< battleZone.length; i++){
+            const battleZone1 = battleZone[i]
+            if ( rectangularCollision ({ //battle zone collision!
+                rect1 : player,
+                rect2: battleZone1
+            })  ) { 
+                console.log("battle zone collision!")
+                break
+            }
+        }
+    }
     if (keys.ArrowUp.pressed && lastKey === 'ArrowUp')
     { //bckground view goes down
         player.moving = true //looping motion within spritesheet
@@ -156,10 +183,11 @@ function animate() {
             })  ) { 
                 moving = false
                 break
-                //console.log("player:", player.position.x,player.position.y )
-                //console.log("boundary:", boundary.position.x,boundary.position.y )
             }
         }
+
+       
+
         if (moving) {
             movables.forEach((movable) => {
                 movable.position.y +=3
@@ -245,33 +273,29 @@ function animate() {
                 movable.position.x -=3
             })
         }
-       // console.log(" x: " , background.pos.x)
+       
     } 
 }
 
 window.addEventListener('keydown', (e) => { // === mousePressed
-    //console.log(e.key)
+
     switch (e.key) { //if keyPressed
         
         case 'ArrowUp':
-           // console.log(" hihi up u go")
-            
+
             keys.ArrowUp.pressed = true
             lastKey = 'ArrowUp'
             
             break
         case 'ArrowDown':
-            //console.log(" huhu down u go")
             keys.ArrowDown.pressed = true
             lastKey = 'ArrowDown'
             break
         case 'ArrowLeft':
-           // console.log(" hehe left u go")
             keys.ArrowLeft.pressed = true
             lastKey = 'ArrowLeft'
             break
         case 'ArrowRight':
-          //  console.log(" hoho right u go")
             keys.ArrowRight.pressed = true
             lastKey = 'ArrowRight'
             break
@@ -279,22 +303,17 @@ window.addEventListener('keydown', (e) => { // === mousePressed
 }) 
 
 window.addEventListener('keyup', (e) => { //equivalent to mouseReleased
-    //console.log(e.key)
     switch (e.key) { //if keyPressed
         case 'ArrowUp':
-            //console.log(" hihi up u go")
             keys.ArrowUp.pressed = false
             break
         case 'ArrowDown':
-           // console.log(" huhu down u go")
             keys.ArrowDown.pressed = false
             break
         case 'ArrowLeft':
-           // console.log(" hehe left u go")
             keys.ArrowLeft.pressed = false
             break
         case 'ArrowRight':
-           // console.log(" hoho right u go")
             keys.ArrowRight.pressed = false
             break
     }
