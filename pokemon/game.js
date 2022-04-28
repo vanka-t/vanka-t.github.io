@@ -140,6 +140,9 @@ function rectangularCollision({rect1, rect2}) { //rect1 = player, rect2 = testBo
     )
 }
 const movables = [background, ...boundaries, foreground, ...battleZone] //dots help since boundaries is an array within this array (weird syntax)
+const battle = {
+    initiated: false
+}
 function animate() {
     window.requestAnimationFrame(animate) 
     background.draw()
@@ -156,6 +159,7 @@ function animate() {
     foreground.draw()
     let moving = true 
     player.moving = false //by default player doesnt move when staying in place
+    if (battle.initiated) {return}
     if (keys.ArrowUp.pressed || keys.ArrowDown.pressed || keys.ArrowLeft.pressed || keys.ArrowRight.pressed){ //battle zone called when player is in motion on battlezone area
         for(let i =0; i< battleZone.length; i++){
             const battleZone1 = battleZone[i]
@@ -177,6 +181,7 @@ function animate() {
             overlappingArea > player.width * player.height /2 &&//overlaping area between player n battlezone when player is on top -- not necessary code but makes it more realistic
             Math.random() < 0.1 //10% chance that battle occurs
             ) { 
+                battle.initiated = true
                 console.log("battle zone collision!")
                 break
             }
@@ -199,9 +204,6 @@ function animate() {
                 break
             }
         }
-
-       
-
         if (moving) {
             movables.forEach((movable) => {
                 movable.position.y +=3
