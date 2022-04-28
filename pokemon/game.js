@@ -12,6 +12,19 @@ img.src = 'assets-prova/map.png'
 
 const playerImg = new Image() //FRONT CHAR
 playerImg.src = 'assets-prova/char2-front.png' 
+
+const playerUpImg = new Image() //BACK CHAR
+playerUpImg.src = 'assets-prova/char2-back.png' 
+
+const playerDownImg = new Image() //FRONT CHAR
+playerDownImg.src = 'assets-prova/char2-front.png' 
+
+const playerLeftImg = new Image() //LEFT CHAR
+playerLeftImg.src = 'assets-prova/char2-left.png' 
+
+const playerRightImg = new Image() //LEFT CHAR
+playerRightImg.src = 'assets-prova/char2-right.png' 
+
 let lastKey = '' //empty str for memory key
 
 const foregroundImg = new Image() //FRONT CHAR
@@ -77,9 +90,16 @@ const player = new Sprite({
         x: canvas.width/2 - 192 /4/2,//precise location for far left sprite in cropped png (192 = player IMAGE WIDTH)
         y: canvas.height/2 - 68/2 //68 = IMAGE HEIGHT
     },
-    img: playerImg,
+    img: playerDownImg,
     frames: {
         max: 4
+    },
+    sprites: {
+        up: playerUpImg,
+        down: playerDownImg,
+        left: playerLeftImg,
+        right: playerRightImg
+
     }
 })
 
@@ -123,7 +143,8 @@ function animate() {
 
     if (keys.ArrowUp.pressed && lastKey === 'ArrowUp')
     { //bckground view goes down
-        player.moving = true
+        player.moving = true //looping motion within spritesheet
+        player.img = player.sprites.up //changes to spprite lokin up
         for(let i =0; i< boundaries.length; i++){
             const boundary = boundaries[i]
             if ( rectangularCollision ({ //calling dimension for player to boundary collision
@@ -132,8 +153,7 @@ function animate() {
                     x: boundary.position.x,
                     y: boundary.position.y +3 //the +3 detects into the future whether or not were about to collide
                 }}
-            })
-            ) { 
+            })  ) { 
                 moving = false
                 break
                 //console.log("player:", player.position.x,player.position.y )
@@ -145,10 +165,10 @@ function animate() {
                 movable.position.y +=3
             })
         }
-        
     } 
     if (keys.ArrowDown.pressed && lastKey === 'ArrowDown'){//bckground view goes up
         player.moving = true
+        player.img = player.sprites.down
         for(let i =0; i< boundaries.length; i++){
             const boundary = boundaries[i]
             if ( rectangularCollision ({ //calling dimension for player to boundary collision
@@ -175,6 +195,7 @@ function animate() {
     } 
     if (keys.ArrowLeft.pressed && lastKey === 'ArrowLeft'){ //bckground view goes left
         player.moving = true
+        player.img = player.sprites.left
         for(let i =0; i< boundaries.length; i++){
             const boundary = boundaries[i]
             if ( rectangularCollision ({ //calling dimension for player to boundary collision
@@ -202,6 +223,7 @@ function animate() {
     } 
     if (keys.ArrowRight.pressed && lastKey === 'ArrowRight'){ //bckground view goes left
         player.moving = true
+        player.img = player.sprites.right
         for(let i =0; i< boundaries.length; i++){
             const boundary = boundaries[i]
             if ( rectangularCollision ({ //calling dimension for player to boundary collision

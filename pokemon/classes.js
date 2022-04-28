@@ -1,5 +1,5 @@
 class Sprite { //character movement
-    constructor({position, velocity, img, frames = {max: 1}}) {
+    constructor({position, velocity, img, frames = {max: 1}, sprites}) {
         this.position = position //position
         this.img = img 
         this.frames = {...frames, val: 0, elapsed:0}
@@ -9,7 +9,8 @@ class Sprite { //character movement
             console.log(this.width, this.height)
 
         }
-        this.moving = false
+        this.moving = false //looping motion when moving
+        this.sprites = sprites //changing between sections of sprite sheet (left right up down etc)
     }
 
     draw() {
