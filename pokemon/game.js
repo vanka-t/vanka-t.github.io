@@ -159,10 +159,24 @@ function animate() {
     if (keys.ArrowUp.pressed || keys.ArrowDown.pressed || keys.ArrowLeft.pressed || keys.ArrowRight.pressed){ //battle zone called when player is in motion on battlezone area
         for(let i =0; i< battleZone.length; i++){
             const battleZone1 = battleZone[i]
+            const overlappingArea =  
+            (Math.min(
+                player.position.x + player.width, 
+                battleZone1.position.x + battleZone1.width
+                ) - //right side of each being compared
+                Math.max(player.position.x, battleZone1.position.x)) * 
+                    (Math.min(
+                        player.position.y + player.height, 
+                        battleZone1.position.y + battleZone1.height
+                        ) -//left side of each being compared
+                Math.max(player.position.y, battleZone1.position.y))
             if ( rectangularCollision ({ //battle zone collision!
                 rect1 : player,
                 rect2: battleZone1
-            })  ) { 
+            }) &&
+            overlappingArea > player.width * player.height /2 &&//overlaping area between player n battlezone when player is on top -- not necessary code but makes it more realistic
+            Math.random() < 0.1 //10% chance that battle occurs
+            ) { 
                 console.log("battle zone collision!")
                 break
             }
