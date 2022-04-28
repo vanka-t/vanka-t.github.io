@@ -119,18 +119,11 @@ function animate() {
     player.draw()
     foreground.draw()
     let moving = true 
+    player.moving = false //by default player doesnt move when staying in place
 
-        
-
-
-
-
-   // playerImg.onload = () => {
-       
-    //}
-    //if (playerImg.position.x + playerImg.width) //right side of player icon
     if (keys.ArrowUp.pressed && lastKey === 'ArrowUp')
     { //bckground view goes down
+        player.moving = true
         for(let i =0; i< boundaries.length; i++){
             const boundary = boundaries[i]
             if ( rectangularCollision ({ //calling dimension for player to boundary collision
@@ -155,6 +148,7 @@ function animate() {
         
     } 
     if (keys.ArrowDown.pressed && lastKey === 'ArrowDown'){//bckground view goes up
+        player.moving = true
         for(let i =0; i< boundaries.length; i++){
             const boundary = boundaries[i]
             if ( rectangularCollision ({ //calling dimension for player to boundary collision
@@ -180,6 +174,7 @@ function animate() {
       
     } 
     if (keys.ArrowLeft.pressed && lastKey === 'ArrowLeft'){ //bckground view goes left
+        player.moving = true
         for(let i =0; i< boundaries.length; i++){
             const boundary = boundaries[i]
             if ( rectangularCollision ({ //calling dimension for player to boundary collision
@@ -206,6 +201,7 @@ function animate() {
        // console.log(" x: " , background.pos.x)
     } 
     if (keys.ArrowRight.pressed && lastKey === 'ArrowRight'){ //bckground view goes left
+        player.moving = true
         for(let i =0; i< boundaries.length; i++){
             const boundary = boundaries[i]
             if ( rectangularCollision ({ //calling dimension for player to boundary collision
@@ -234,10 +230,13 @@ function animate() {
 window.addEventListener('keydown', (e) => { // === mousePressed
     //console.log(e.key)
     switch (e.key) { //if keyPressed
+        
         case 'ArrowUp':
            // console.log(" hihi up u go")
+            
             keys.ArrowUp.pressed = true
             lastKey = 'ArrowUp'
+            
             break
         case 'ArrowDown':
             //console.log(" huhu down u go")
