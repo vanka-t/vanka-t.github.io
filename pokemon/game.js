@@ -1,3 +1,5 @@
+console.log(gsap)// to see library references
+
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d') //ctx = context
 
@@ -30,6 +32,14 @@ let lastKey = '' //empty str for memory key
 const foregroundImg = new Image() //FRONT CHAR
 foregroundImg.src = 'assets-prova/foreground.png' 
 
+const battleBackImg = new Image() //BATTLE BACKGROUND
+battleBackImg.src = 'assets-prova/battleGround.png'
+const battleBack  = new Sprite({position: {
+     x:0,
+     y:0
+ },
+img: battleBackImg
+})
 
 const collisionsMap = []
 for (let i = 0; i<collisions.length; i+= 70){ //70 bc its the map tile width!!  
@@ -92,12 +102,6 @@ const keys = {
     }
 }
 
-
-
-
- // , 
-// ,
-
 const player = new Sprite({
     position:{
         x: canvas.width/2 - 192 /4/2,//precise location for far left sprite in cropped png (192 = player IMAGE WIDTH)
@@ -139,12 +143,13 @@ function rectangularCollision({rect1, rect2}) { //rect1 = player, rect2 = testBo
         rect1.position.y + rect1.height >= rect2.position.y
     )
 }
+
 const movables = [background, ...boundaries, foreground, ...battleZone] //dots help since boundaries is an array within this array (weird syntax)
 const battle = {
     initiated: false
 }
 function animate() {
-    window.requestAnimationFrame(animate) 
+    const animationId = window.requestAnimationFrame(animate) 
     background.draw()
     
     boundaries.forEach((boundary) => {//collisions drawn
@@ -182,11 +187,37 @@ function animate() {
             Math.random() < 0.1 //10% chance that battle occurs
             ) { 
                 battle.initiated = true
+                window.cancelAnimationFrame(animationId) //removes map n everything from screen
+                gsap.to('#overlappingDiv', {
+                    opacity: 1,
+                    repeat:3, //shows battle screen 3 times
+                    yoyo: true, //less harsh to the eye
+                    duration: 0.5,
+                    onComplete() {
+                        gsap.to('#overlappingDiv', {
+                            opacity:1, // starts battle screen flash
+                            duration : 0.5, //--ease in
+                            onComplete(){
+                                battleTime(); //calls battle scene
+                                gsap.to('#overlappingDiv', {
+                                    opacity:0, // removes flash 
+                                    duration : 0.5 //--ease out
+
+                                })
+
+                            }
+                        })
+                    
+                    }
+                })
+                
                 console.log("battle zone collision!")
                 break
             }
         }
     }
+
+    
     if (keys.ArrowUp.pressed && lastKey === 'ArrowUp')
     { //bckground view goes down
         player.moving = true //looping motion within spritesheet
@@ -293,6 +324,14 @@ function animate() {
     } 
 }
 
+function battleTime() {
+    // gsap.to('#overlappingDiv', {
+    //     opacity: 0
+    // })
+    window.requestAnimationFrame(battleTime);
+    battleBack.draw()
+}
+
 window.addEventListener('keydown', (e) => { // === mousePressed
 
     switch (e.key) { //if keyPressed
@@ -334,4 +373,5 @@ window.addEventListener('keyup', (e) => { //equivalent to mouseReleased
             break
     }
 }) 
-animate();
+//animate();
+battleTime();
