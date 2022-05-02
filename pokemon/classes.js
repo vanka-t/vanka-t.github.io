@@ -1,5 +1,5 @@
 class Sprite { //character movement
-    constructor({position, velocity, img, frames = {max: 1}, sprites}) {
+    constructor({position, velocity, img, frames = {max: 1}, sprites, animate=false}) {
         this.position = position //position
         this.img = img 
         this.frames = {...frames, val: 0, elapsed:0}
@@ -9,7 +9,8 @@ class Sprite { //character movement
             console.log(this.width, this.height)
 
         }
-        this.moving = false //looping motion when moving
+        //this.moving = false //looping motion when moving
+        this.animate = animate // to loop sprites that dont need keyPressed to make them move, but move automatically
         this.sprites = sprites //changing between sections of sprite sheet (left right up down etc)
     }
 
@@ -29,7 +30,7 @@ class Sprite { //character movement
             this.img.height
         )
 
-        if (!this.moving) return //if moving == True, return
+        if (!this.animate) return //if moving == True, return
             if (this.frames.max > 1) {  //slow down loop animation
                 this.frames.elapsed += 1
             }
@@ -44,6 +45,18 @@ class Sprite { //character movement
         
         
     }
+    // motion(){ //REMOVE ANIMATE SI PARAM N JUST DO THIS IF NOT NECESSARY
+    //     if (this.frames.max > 1) {  //slow down loop animation
+    //         this.frames.elapsed += 1
+    //     }
+    //     if (this.frames.elapsed % 10 === 0){ 
+    //         if (this.frames.val  < this.frames.max - 1){
+    //             this.frames.val ++ //going through the sprite sheet
+    //         } else {
+    //             this.frames.val = 0 //loops thru the sheet
+    //         }
+    //     }
+    // }
 }
 pixels = 40.5 //pixel size of tiles after zooming in at 400% == x(original pixels) * 4 (400%)
 

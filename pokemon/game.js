@@ -41,6 +41,21 @@ const battleBack  = new Sprite({position: {
 img: battleBackImg
 })
 
+const rivalImg = new Image()
+rivalImg.src = 'assets-prova/draggleSprite.png'
+const rival = new Sprite({
+    position: {
+        x: 730, // adjust position accordingly based on rival location
+        y: 180
+    },
+    img: rivalImg,
+    frames: {
+        max:4 //crop pic to 4
+    },
+    animate: true
+})
+
+
 const collisionsMap = []
 for (let i = 0; i<collisions.length; i+= 70){ //70 bc its the map tile width!!  
     collisionsMap.push(collisions.slice(i, i+70))
@@ -163,7 +178,7 @@ function animate() {
     player.draw()
     foreground.draw()
     let moving = true 
-    player.moving = false //by default player doesnt move when staying in place
+    player.animate = false //by default player doesnt move when staying in place
     if (battle.initiated) {return}
     if (keys.ArrowUp.pressed || keys.ArrowDown.pressed || keys.ArrowLeft.pressed || keys.ArrowRight.pressed){ //battle zone called when player is in motion on battlezone area
         for(let i =0; i< battleZone.length; i++){
@@ -220,7 +235,7 @@ function animate() {
     
     if (keys.ArrowUp.pressed && lastKey === 'ArrowUp')
     { //bckground view goes down
-        player.moving = true //looping motion within spritesheet
+        player.animate = true //looping motion within spritesheet
         player.img = player.sprites.up //changes to spprite lokin up
         for(let i =0; i< boundaries.length; i++){
             const boundary = boundaries[i]
@@ -242,7 +257,7 @@ function animate() {
         }
     } 
     if (keys.ArrowDown.pressed && lastKey === 'ArrowDown'){//bckground view goes up
-        player.moving = true
+        player.animate = true
         player.img = player.sprites.down
         for(let i =0; i< boundaries.length; i++){
             const boundary = boundaries[i]
@@ -269,7 +284,7 @@ function animate() {
       
     } 
     if (keys.ArrowLeft.pressed && lastKey === 'ArrowLeft'){ //bckground view goes left
-        player.moving = true
+        player.animate = true
         player.img = player.sprites.left
         for(let i =0; i< boundaries.length; i++){
             const boundary = boundaries[i]
@@ -297,7 +312,7 @@ function animate() {
        // console.log(" x: " , background.pos.x)
     } 
     if (keys.ArrowRight.pressed && lastKey === 'ArrowRight'){ //bckground view goes left
-        player.moving = true
+        player.animate = true
         player.img = player.sprites.right
         for(let i =0; i< boundaries.length; i++){
             const boundary = boundaries[i]
@@ -330,6 +345,8 @@ function battleTime() {
     // })
     window.requestAnimationFrame(battleTime);
     battleBack.draw()
+    rival.draw()
+    //rival.motion()
 }
 
 window.addEventListener('keydown', (e) => { // === mousePressed
