@@ -289,7 +289,7 @@ document.querySelectorAll('button').forEach(button => { //clicking attack button
         console.log("clickky time")
         weapon.attack({attack:{
             name: 'tackle',
-            damage: x,
+            damage: 10,
             type: 'normal'
         },
         recipient: rival

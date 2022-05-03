@@ -43,7 +43,28 @@ class Sprite { //character movement
             }
 
     }
-    
+    attack({attack, recipient}){
+        const timeline = gsap.timeline()
+        timeline.to(this.position, { //moving(vrull) when ur about to attack 
+            x: this.position.x - 20,
+            //duration: 0.05
+        }).to(this.position, {
+            x: this.position.x + 40, //go right 40 px -- attacking
+            duration: 0.09, //faster motion
+            onComplete(){
+                gsap.to(recipient.position, {
+                    x: recipient.position.x + 10, //enemy jerks back
+                    yoyo: true, //move back n forth according to x
+                    duration: 0.1, 
+                    repeat: 5 //repeat 5 times to imitate pokemon style
+                })
+            }
+        }).to(this.position, {
+            x: this.position.x, //player returns to roiginal pos after attacking
+            //duration: 0.05
+        })
+        
+    }
     // motion(){ //REMOVE ANIMATE SI PARAM N JUST DO THIS IF NOT NECESSARY
     //     if (this.frames.max > 1) {  //slow down loop animation
     //         this.frames.elapsed += 1
