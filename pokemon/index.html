@@ -14,6 +14,10 @@
             body {
                 background-color: beige;
             }
+
+            h1 {
+                margin: 0;
+            }
         </style>
         <div style="display: inline-block; position: relative;">
 
@@ -27,15 +31,45 @@
             opacity: 0;
             pointer-events: none; "
             ></div>
+            <!--Battle scene-->
             <canvas width="1024" height="576"></canvas>
+            <div id="attackBar" style="position:absolute; 
+            background-color: green; 
+            width: 1024px;
+            height:100px;
+            bottom: 0;
+            left: 0;
+            right:0;
+            border-top: 3px black solid;
+            display:flex
+            "> <!--qe te rrin te e njejta lane e kshu krejt elementet-->
+           
+            
+            
+            <div> 
+                <button id="button1">Attack1</button>
+                <button id="button2">Attack2</button>
+                <button id="button3">Attack3</button>
+                <button id="button4">Attack4</button>
+            </div> 
+            <div><h1> Attack Type</h1> </div>
+            </div>
+
+            
+            
+
+
+            
         </div>
         
         
-        </canvas>
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js" integrity="sha512-VEBjfxWUOyzl0bAwh4gdLEaQyDYPvLrZql3pw1ifgb6fhEvZl9iDDehwHZ+dsMzA0Jfww8Xt7COSZuJ/slxc4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="data/collisions.js"></script>
         <script src="data/battleZone.js"></script>
+
         <script src="classes.js"></script>
+        <script src="basicSettings.js"></script>
         <script src="game.js"></script>
         
     </body>

@@ -1,5 +1,5 @@
 class Sprite { //character movement
-    constructor({position, velocity, img, frames = {max: 1}, sprites, animate=false}) {
+    constructor({position, velocity, img, frames = {max: 1, hold:10}, sprites, animate=false}) {
         this.position = position //position
         this.img = img 
         this.frames = {...frames, val: 0, elapsed:0}
@@ -34,7 +34,7 @@ class Sprite { //character movement
             if (this.frames.max > 1) {  //slow down loop animation
                 this.frames.elapsed += 1
             }
-            if (this.frames.elapsed % 10 === 0){ 
+            if (this.frames.elapsed % this.frames.hold === 0){  //"hold == rate of speed of animation
                 if (this.frames.val  < this.frames.max - 1){
                     this.frames.val ++ //going through the sprite sheet
                 } else {
