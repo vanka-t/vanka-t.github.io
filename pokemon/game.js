@@ -271,6 +271,8 @@ function animate() {
     } 
 }
 
+
+
 function battleTime() {
     // gsap.to('#overlappingDiv', {
     //     opacity: 0
@@ -281,6 +283,20 @@ function battleTime() {
     //rival.motion()
     weapon.draw()
 }
+
+document.querySelectorAll('button').forEach(button => { //clicking attack buttons
+    button.addEventListener('click' , ()=> {
+        console.log("clickky time")
+        weapon.attack({attack:{
+            name: 'tackle',
+            damage: x,
+            type: 'normal'
+        },
+        recipient: rival
+        })
+    })
+    console.log('button');
+})
 
 window.addEventListener('keydown', (e) => { // === mousePressed
 

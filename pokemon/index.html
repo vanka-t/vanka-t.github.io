@@ -40,7 +40,43 @@
             opacity: 0;
             pointer-events: none; "
             ></div>
-            <!--Battle scene-->
+            <!--ENEMY CHAR INFO-->
+            <div style="
+            background-color: white;
+            width: 270px;
+            height: 40px;
+            top: 50px;
+            left: 50px;
+            border: 4px black solid;
+            position: absolute;
+            padding: 15px
+            ">
+            <h1 style="font-size: 20px;"> Enemy </h1>
+            <!--ENEMY HP BAR-->
+            <div style="position: relative">
+                <div style="background-color: grey; height: 5px; margin-top: 10px;"></div>
+                <div style="background-color: green; height: 5px; position:absolute; right:0; top:0; left:0"></div></div>
+            </div>
+
+            <!--PROTAGONIST CHAR BATTLE INFO-->
+            <div style="
+                background-color: white;
+                width: 270px;
+                height: 40px;
+                top: 360px;
+                left: 650px;
+                border: 4px black solid;
+                position: absolute;
+                padding: 15px
+                        ">
+                        <h1 style="font-size: 20px;"> You </h1>
+                        <!--ENEMY HP BAR-->
+                        <div style="position: relative">
+                            <div style="background-color: grey; height: 5px; margin-top: 10px;"></div>
+                            <div style="background-color: green; height: 5px; position:absolute; right:0; top:0; left:0"></div></div>
+                        </div>
+
+            <!--BATTLE ATTACK OPTIONS-->
             <canvas width="1024" height="576"></canvas>
             <div id="attackBar" style="position:absolute; 
             background-color: green; 
@@ -59,7 +95,7 @@
             width:66.66%;
             display: grid;
             grid-template-columns: repeat(2,1fr);"> 
-                <button id="button1">Attack1</button>
+                <button id="button1">TACKLE</button>
                 <button id="button2">Attack2</button>
                 <button id="button3">Attack3</button>
                 <button id="button4">Attack4</button>
@@ -71,7 +107,7 @@
             justify-content: center; 
             width: 33.33%;
             border-left: 3px black solid"
-            ><h1> Attack Type</h1> </div>
+            ><h1 style="font-size: 20px;"> Attack Type</h1> </div>
             </div>         
         </div>
         

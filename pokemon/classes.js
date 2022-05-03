@@ -41,10 +41,9 @@ class Sprite { //character movement
                     this.frames.val = 0 //loops thru the sheet
                 }
             }
-        
-        
-        
+
     }
+    
     // motion(){ //REMOVE ANIMATE SI PARAM N JUST DO THIS IF NOT NECESSARY
     //     if (this.frames.max > 1) {  //slow down loop animation
     //         this.frames.elapsed += 1
