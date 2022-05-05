@@ -289,9 +289,9 @@ function battleTime() {
 document.querySelectorAll('button').forEach((button) => { //clicking attack buttons
     button.addEventListener('click' , (e)=> {
          const selectedAttack = attacks[e.currentTarget.innerHTML] //targets n links attack on attacks.js with HTML buttons
-         rival.attack({
+         weapon.attack({
              attack: selectedAttack,
-             recipient: weapon,
+             recipient: rival,
              renderedSprites
         })
         console.log(e.currentTarget.innerHTML)

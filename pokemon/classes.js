@@ -58,6 +58,10 @@ class Sprite { //character movement
     attack({attack, recipient, renderedSprites}){
         let hpBar = '#player-hp'
         if (!this.isRival) hpBar = '#rival-hp'
+        let rotation = 5
+        if (this.isRival) {
+            rotation = -5
+        }
         this.health -= attack.damage //sa her q e gjun te ulet score repeatedly --declaring health points here so taht its updated during loops
                
 
