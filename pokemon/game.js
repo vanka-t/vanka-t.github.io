@@ -371,5 +371,5 @@ window.addEventListener('keyup', (e) => { //equivalent to mouseReleased
             break
     }
 }) 
-//animate();
-battleTime();
+animate();
+//battleTime();
