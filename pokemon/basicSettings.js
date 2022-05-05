@@ -39,51 +39,12 @@ const battleBack  = new Sprite({position: {
 img: battleBackImg
 })
 
-const rivalImg = new Image()
-rivalImg.src = 'assets-prova/draggleSprite.png'
-const rival = new Sprite({
-    position: {
-        x: 730, // adjust position accordingly based on rival location
-        y: 180
-    },
-    img: rivalImg,
-    frames: {
-        max:4, //crop pic to 4
-        hold: 15
-    },
-    animate: true,
-    isEnemy: true //enables  hp bar settings to get attacked
-})
 
-const weaponImg = new Image()
-weaponImg.src = 'assets-prova/embySprite.png'
-const weapon = new Sprite({
-    position: {
-        x: 270, // adjust position accordingly based on rival location
-        y: 340
-    },
-    img: weaponImg,
-    frames: {
-        max:4, //crop pic to 4
-        hold: 15
-    },
-    animate: true
-})
 
-const throwBallImg = new Image()
-throwBallImg.src = 'assets-prova/bubble-throw.png'
-const throwBall = new Sprite({
-    position: {
-        x: 270, // adjust position accordingly based on rival location
-        y: 340
-    },
-    img: throwBallImg,
-    frames: {
-        max:4, //crop pic to 4
-        hold: 15
-    },
-    animate: true
-})
+
+
+
+
 
 const collisionsMap = []
 for (let i = 0; i<collisions.length; i+= 70){ //70 bc its the map tile width!!  

@@ -271,8 +271,17 @@ function animate() {
     } 
 }
 
-
+const weapon = new Monster(fighters.Weapon)
+const rival = new Monster(fighters.Rival)
 const renderedSprites = [rival, weapon]//putting rival before weapon so weapon renders last -- so it + fireball show up on top of canvas
+
+weapon.attacks.forEach(attack => {
+    const button  = document.createElement('button')
+    button.innerHTML = attack.name //BUTTON
+    document.querySelector('#attacks-box').append(button)
+
+})
+
 function battleTime() {
     window.requestAnimationFrame(battleTime);
     battleBack.draw()
@@ -284,7 +293,7 @@ function battleTime() {
 
     })
 }
-
+const queue = []
 //event listeners for button
 document.querySelectorAll('button').forEach((button) => { //clicking attack buttons
     button.addEventListener('click' , (e)=> {
@@ -295,11 +304,32 @@ document.querySelectorAll('button').forEach((button) => { //clicking attack butt
              renderedSprites
         })
         console.log(e.currentTarget.innerHTML)
+        queue.push(() => {
+            rival.attack({
+                attack: attacks.TACKLE,
+                recipient: weapon,
+                renderedSprites
+            })
+        })
+        queue.push(() => {
+            rival.attack({
+                attack: attacks.throwBall,
+                recipient: weapon,
+                renderedSprites
+            })
+        })
         //console.log(attacks[e.currentTarget.innerHTML])
-        
-        
     })
-    //console.log('button');
+})
+
+document.querySelector('#dialogue-box').addEventListener('click', (e) => { //e = event object inaide of it
+   
+    if(queue.length >1){ //if sums been added -- aka attack
+        queue[0]() //call attack
+        queue.shift()//queue is reset after action
+    } else {
+        e.currentTarget.style.display = 'none' //remove dialogue box
+    }
 })
 
 window.addEventListener('keydown', (e) => { // === mousePressed

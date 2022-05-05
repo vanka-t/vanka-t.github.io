@@ -1,5 +1,5 @@
 class Sprite { //character movement
-    constructor({position, velocity, img, frames = {max: 1, hold:10}, sprites, animate=false, isRival = false, rotation =0}) {
+    constructor({position, velocity, img, frames = {max: 1, hold:10}, sprites, animate=false}) {
         this.position = position //position
         this.img = img 
         this.frames = {...frames, val: 0, elapsed:0}
@@ -13,9 +13,8 @@ class Sprite { //character movement
         this.animate = animate // to loop sprites that dont need keyPressed to make them move, but move automatically
         this.sprites = sprites //changing between sections of sprite sheet (left right up down etc)
         this.opacity = 1
-        this.health = 100 //max health hp bar
-        this.isRival = this.isRival
-        this.rotation = rotation
+        
+
     }
 
     draw() {
@@ -55,7 +54,53 @@ class Sprite { //character movement
             }
 
     }
+
+    // motion(){ //REMOVE ANIMATE SI PARAM N JUST DO THIS IF NOT NECESSARY
+    //     if (this.frames.max > 1) {  //slow down loop animation
+    //         this.frames.elapsed += 1
+    //     }
+    //     if (this.frames.elapsed % 10 === 0){ 
+    //         if (this.frames.val  < this.frames.max - 1){
+    //             this.frames.val ++ //going through the sprite sheet
+    //         } else {
+    //             this.frames.val = 0 //loops thru the sheet
+    //         }
+    //     }
+    // }
+}
+pixels = 40.5 //pixel size of tiles after zooming in at 400% == x(original pixels) * 4 (400%)
+
+class Boundary {
+    static width = pixels
+    static height = pixels 
+    constructor({position}) {
+        this.position = position
+        this.width = pixels 
+        this.height = pixels 
+    }
+
+    draw() {
+        c.fillStyle = ' rgba(0,0,0,0)'//'black'
+        c.fillRect(this.position.x, this.position.y, this.width,this.height)//this.width, this.height)
+    }
+}
+
+class Monster extends Sprite {
+    constructor({position, velocity, img, frames = {max: 1, hold:10}, sprites, animate=false, isRival = false, rotation =0, name, attacks}){
+        super({ //follows parent params
+            position, velocity, img, frames, sprites, animate
+
+        })
+        this.health = 100 //max health hp bar
+        this.isRival = isRival
+        this.rotation = rotation
+        this.name = name
+        this.attacks = attacks
+    }
     attack({attack, recipient, renderedSprites}){
+        document.querySelector('#dialogue-box').style.display = 'block' //show dialogue
+        document.querySelector('#dialogue-box').innerHTML = this.name + ' USED ' + attack.name + '!' //formatting
+        
         let hpBar = '#player-hp'
         if (!this.isRival) hpBar = '#rival-hp'
         let rotation = 5
@@ -67,6 +112,7 @@ class Sprite { //character movement
 
         switch (attack.name) { 
             case 'THROW':
+                
                 const throwBallImg = new Image()
                 throwBallImg.src = 'assets-prova/bubble-throw.png'
                 const throwBall = new Sprite({
@@ -115,6 +161,7 @@ class Sprite { //character movement
 
                 break
             case 'TACKLE': //if choosing tackle, run this
+            document.querySelector('#dialogue-box').innerHTML = 'TACKLE TIME WOOOO'
                 const timeline = gsap.timeline()
                 let movingDist = 20
                 if(this.isRival) { //if its true that this is the rival, make it move back
@@ -159,32 +206,5 @@ class Sprite { //character movement
         
         
     }
-    // motion(){ //REMOVE ANIMATE SI PARAM N JUST DO THIS IF NOT NECESSARY
-    //     if (this.frames.max > 1) {  //slow down loop animation
-    //         this.frames.elapsed += 1
-    //     }
-    //     if (this.frames.elapsed % 10 === 0){ 
-    //         if (this.frames.val  < this.frames.max - 1){
-    //             this.frames.val ++ //going through the sprite sheet
-    //         } else {
-    //             this.frames.val = 0 //loops thru the sheet
-    //         }
-    //     }
-    // }
-}
-pixels = 40.5 //pixel size of tiles after zooming in at 400% == x(original pixels) * 4 (400%)
 
-class Boundary {
-    static width = pixels
-    static height = pixels 
-    constructor({position}) {
-        this.position = position
-        this.width = pixels 
-        this.height = pixels 
-    }
-
-    draw() {
-        c.fillStyle = ' rgba(0,0,0,0)'//'black'
-        c.fillRect(this.position.x, this.position.y, this.width,this.height)//this.width, this.height)
-    }
 }
