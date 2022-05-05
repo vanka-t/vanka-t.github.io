@@ -51,7 +51,8 @@ const rival = new Sprite({
         max:4, //crop pic to 4
         hold: 15
     },
-    animate: true
+    animate: true,
+    isEnemy: true //enables  hp bar settings to get attacked
 })
 
 const weaponImg = new Image()
@@ -69,6 +70,20 @@ const weapon = new Sprite({
     animate: true
 })
 
+const throwBallImg = new Image()
+throwBallImg.src = 'assets-prova/bubble-throw.png'
+const throwBall = new Sprite({
+    position: {
+        x: 270, // adjust position accordingly based on rival location
+        y: 340
+    },
+    img: throwBallImg,
+    frames: {
+        max:4, //crop pic to 4
+        hold: 15
+    },
+    animate: true
+})
 
 const collisionsMap = []
 for (let i = 0; i<collisions.length; i+= 70){ //70 bc its the map tile width!!  

@@ -272,38 +272,40 @@ function animate() {
 }
 
 
-
+const renderedSprites = [rival, weapon]//putting rival before weapon so weapon renders last -- so it + fireball show up on top of canvas
 function battleTime() {
-    // gsap.to('#overlappingDiv', {
-    //     opacity: 0
-    // })
     window.requestAnimationFrame(battleTime);
     battleBack.draw()
-    rival.draw()
-    //rival.motion()
-    weapon.draw()
+    // rival.draw()
+    // weapon.draw()
+
+    renderedSprites.forEach(sprite => { //by default sprites are gonna be pushed
+        sprite.draw()
+
+    })
 }
 
-document.querySelectorAll('button').forEach(button => { //clicking attack buttons
-    button.addEventListener('click' , ()=> {
-        console.log("clickky time")
-        weapon.attack({attack:{
-            name: 'tackle',
-            damage: 10,
-            type: 'normal'
-        },
-        recipient: rival
+//event listeners for button
+document.querySelectorAll('button').forEach((button) => { //clicking attack buttons
+    button.addEventListener('click' , (e)=> {
+         const selectedAttack = attacks[e.currentTarget.innerHTML] //targets n links attack on attacks.js with HTML buttons
+         rival.attack({
+             attack: selectedAttack,
+             recipient: weapon,
+             renderedSprites
         })
+        console.log(e.currentTarget.innerHTML)
+        //console.log(attacks[e.currentTarget.innerHTML])
+        
+        
     })
-    console.log('button');
+    //console.log('button');
 })
 
 window.addEventListener('keydown', (e) => { // === mousePressed
 
     switch (e.key) { //if keyPressed
-        
         case 'ArrowUp':
-
             keys.ArrowUp.pressed = true
             lastKey = 'ArrowUp'
             

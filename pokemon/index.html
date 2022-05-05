@@ -54,8 +54,8 @@
             <h1 style="font-size: 20px;"> Enemy </h1>
             <!--ENEMY HP BAR-->
             <div style="position: relative">
-                <div style="background-color: grey; height: 5px; margin-top: 10px;"></div>
-                <div style="background-color: green; height: 5px; position:absolute; right:0; top:0; left:0"></div></div>
+                <div style="background-color: white; height: 5px; margin-top: 10px;"></div>
+                <div id="rival-hp" style="background-color: green; height: 5px; position:absolute; right:0; top:0; left:0"></div></div>
             </div>
 
             <!--PROTAGONIST CHAR BATTLE INFO-->
@@ -70,10 +70,10 @@
                 padding: 15px
                         ">
                         <h1 style="font-size: 20px;"> You </h1>
-                        <!--ENEMY HP BAR-->
+                        <!--PLAYER HP BAR-->
                         <div style="position: relative">
                             <div style="background-color: grey; height: 5px; margin-top: 10px;"></div>
-                            <div style="background-color: green; height: 5px; position:absolute; right:0; top:0; left:0"></div></div>
+                            <div id="player-hp" style="background-color: green; height: 5px; position:absolute; right:0; top:0; left:0"></div></div>
                         </div>
 
             <!--BATTLE ATTACK OPTIONS-->
@@ -96,11 +96,10 @@
             display: grid;
             grid-template-columns: repeat(2,1fr);"> 
                 <button id="tackleButton">TACKLE</button>
-                <button id="button2">Attack2</button>
-                <button id="button3">Attack3</button>
-                <button id="button4">Attack4</button>
+                <button id="button2">THROW</button>
+               
             </div> 
-            <!--centering everything-->
+            <!--centering everything in attack bar-->
             <div style= 
             "display: flex;
             align-items: center;
@@ -116,6 +115,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js" integrity="sha512-VEBjfxWUOyzl0bAwh4gdLEaQyDYPvLrZql3pw1ifgb6fhEvZl9iDDehwHZ+dsMzA0Jfww8Xt7COSZuJ/slxc4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="data/collisions.js"></script>
         <script src="data/battleZone.js"></script>
+        <script src="data/attacks.js"></script>
 
         <script src="classes.js"></script>
         <script src="basicSettings.js"></script>
