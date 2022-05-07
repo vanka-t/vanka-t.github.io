@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html> 
     <head> 
+        
         <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +12,7 @@
         </head>
     </head>
     <body> 
+        
         <style> 
             body {
                 background-color: beige;
@@ -28,6 +30,7 @@
                 cursor: pointer
             }
         </style>
+        
         <div style="display: inline-block; position: relative;">
 
             <div  id="overlappingDiv" style="
@@ -41,25 +44,30 @@
             pointer-events: none; "
             ></div>
 
-            <canvas></canvas>
-            <!--ENEMY CHAR INFO-->
-            <div style="
-            background-color: white;
-            width: 270px;
-            height: 40px;
-            top: 50px;
-            left: 50px;
-            border: 4px black solid;
-            position: absolute;
-            padding: 15px
-            ">
-            <h1 style="font-size: 20px;"> Enemy </h1>
-            <!--ENEMY HP BAR-->
-            <div style="position: relative">
-                <div style="background-color: white; height: 5px; margin-top: 10px;"></div>
-                <div id="rival-hp" style="background-color: green; height: 5px; position:absolute; right:0; top:0; left:0"></div></div>
-            </div>
+            <!--<canvas></canvas>-->
+            
+        
 
+        <canvas width="1024" height="576"></canvas>
+        <!--ENEMY CHAR INFO-->
+        <div style="
+        background-color: white;
+        width: 270px;
+        height: 40px;
+        top: 50px;
+        left: 50px;
+        border: 4px black solid;
+        position: absolute;
+        padding: 15px;
+        
+        ">
+        <h1 style="font-size: 20px;"> Enemy </h1>
+        <!--ENEMY HP BAR-->
+        <div style="position: relative">
+            <div style="background-color: white; height: 5px; margin-top: 10px;"></div>
+            <div id="rival-hp" style="background-color: green; height: 5px; position:absolute; right:0; top:0; left:0"></div>
+        </div>
+        </div>
             <!--PROTAGONIST CHAR BATTLE INFO-->
             <div style="
                 background-color: white;
@@ -79,7 +87,7 @@
                         </div>
 
             <!--BATTLE ATTACK OPTIONS-->
-            <canvas width="1024" height="576"></canvas>
+            
             <div id="attackBar" style="position:absolute; 
             background-color: green; 
             width: 1024px;
@@ -92,6 +100,7 @@
             "> <!--qe te rrin te e njejta lane e kshu krejt elementet-->
            
             <!--dialogue container siper chat boxes-->
+            
             <div id="dialogue-box"
             style="
             background-color: white;
@@ -115,7 +124,7 @@
                 <button id="tackleButton">TACKLE</button>
                 <button id="button2">THROW</button>
             -->
-               
+            
             </div> 
             <!--centering everything in attack bar-->
             <div style= 
@@ -125,9 +134,12 @@
             width: 33.33%;
             border-left: 3px black solid"
             ><h1 style="font-size: 20px;"> Attack Type</h1> </div>
-            </div>         
+            </div> 
+                    
         </div>
         
+        
+       
         
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js" integrity="sha512-VEBjfxWUOyzl0bAwh4gdLEaQyDYPvLrZql3pw1ifgb6fhEvZl9iDDehwHZ+dsMzA0Jfww8Xt7COSZuJ/slxc4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

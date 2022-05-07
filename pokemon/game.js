@@ -287,6 +287,7 @@ function battleTime() {
     battleBack.draw()
     // rival.draw()
     // weapon.draw()
+   // document.querySelector('#attacks-box').append(button)
 
     renderedSprites.forEach(sprite => { //by default sprites are gonna be pushed
         sprite.draw()
@@ -303,17 +304,11 @@ document.querySelectorAll('button').forEach((button) => { //clicking attack butt
              recipient: rival,
              renderedSprites
         })
+        const random_attack = rival.attacks[Math.floor[Math.random() * rival.attacks.length]] //randomize which attack is used (Math.floor = python's round())
         console.log(e.currentTarget.innerHTML)
         queue.push(() => {
             rival.attack({
-                attack: attacks.TACKLE,
-                recipient: weapon,
-                renderedSprites
-            })
-        })
-        queue.push(() => {
-            rival.attack({
-                attack: attacks.throwBall,
+                attack: selectedAttack,
                 recipient: weapon,
                 renderedSprites
             })
@@ -371,5 +366,5 @@ window.addEventListener('keyup', (e) => { //equivalent to mouseReleased
             break
     }
 }) 
-animate();
-//battleTime();
+//animate();
+battleTime();

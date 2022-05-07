@@ -33,6 +33,7 @@ const fighters = {
             hold: 15
         },
         animate: true,
+        isEnemy: true, //not sure abt thi
         name: 'UR POKEMON',
         attacks: [attacks.TACKLE, attacks.THROW]
     }
