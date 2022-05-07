@@ -39,13 +39,6 @@ const battleBack  = new Sprite({position: {
 img: battleBackImg
 })
 
-
-
-
-
-
-
-
 const collisionsMap = []
 for (let i = 0; i<collisions.length; i+= 70){ //70 bc its the map tile width!!  
     collisionsMap.push(collisions.slice(i, i+70))

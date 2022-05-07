@@ -16,7 +16,7 @@ const fighters = {
             hold: 15
         },
         animate: true,
-        isEnemy: true, //enables  hp bar settings to get attacked
+        isRival: true, //enables  hp bar settings to get attacked
         name: 'ENEMY',
         attacks: [attacks.TACKLE, attacks.THROW]
 
@@ -33,7 +33,7 @@ const fighters = {
             hold: 15
         },
         animate: true,
-        isEnemy: true, //not sure abt thi
+        isRival: false, //not sure abt thi
         name: 'UR POKEMON',
         attacks: [attacks.TACKLE, attacks.THROW]
     }

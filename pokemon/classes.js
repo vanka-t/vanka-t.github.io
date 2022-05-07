@@ -102,7 +102,7 @@ class Monster extends Sprite {
         document.querySelector('#dialogue-box').innerHTML = this.name + ' USED ' + attack.name + '!' //formatting
         
         let hpBar = '#player-hp'
-        if (!this.isRival) hpBar = '#rival-hp'
+        if (this.isRival) {hpBar = '#player-hp'} else {hpBar = '#rival-hp'}
         let rotation = 5
         if (this.isRival) {
             rotation = -5
@@ -166,7 +166,7 @@ class Monster extends Sprite {
                 let movingDist = 20
                 if(this.isRival) { //if its true that this is the rival, make it move back
                 movingDist = -20
-        }
+                }
       
 
         timeline.to(this.position, { //moving(vrull) when ur about to attack 
@@ -178,7 +178,12 @@ class Monster extends Sprite {
             onComplete: () => {
 
                 //lower enemy hp bar
-                console.log(hpBar)
+                console.log("hp bar:", hpBar)
+                console.log("recipient",recipient)
+                console.log("hp health:", this.health)
+                console.log("attack.damage",this.health - attack.damage )
+                
+                
                 gsap.to(hpBar,{
                     
                     width: this.health - attack.damage + '%'

@@ -42,6 +42,9 @@ document.querySelectorAll('button').forEach((button) => { //clicking attack butt
         })
         //console.log(attacks[e.currentTarget.innerHTML])
     })
+    button.addEventListener('mouseenter',()=>{ // what to do when button is clicked 
+        console.log("attack type")
+    })
 })
 
 document.querySelector('#dialogue-box').addEventListener('click', (e) => { //e = event object inaide of it
