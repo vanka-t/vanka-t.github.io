@@ -1,7 +1,7 @@
-const weaponImg = new Image()
-weaponImg.src = 'assets-prova/embySprite.png'
-const rivalImg = new Image()
-rivalImg.src = 'assets-prova/zelda.png'
+// const weaponImg = new Image()
+// weaponImg.src = 'assets-prova/embySprite.png'
+// const rivalImg = new Image()
+// rivalImg.src = 'assets-prova/zelda.png'
 
 
 const fighters = {
@@ -10,7 +10,9 @@ const fighters = {
             x: 730, // adjust position accordingly based on rival location
             y: 180
         },
-        img: rivalImg,
+        img: {
+            src: 'assets-prova/zelda.png'
+        },
         frames: {
             max:4, //crop pic to 4
             hold: 15
@@ -18,7 +20,9 @@ const fighters = {
         animate: true,
         isRival: true, //enables  hp bar settings to get attacked
         name: 'ENEMY',
-        attacks: [attacks.TACKLE, attacks.THROW]
+        attacks: [attacks.TACKLE, attacks.THROW],
+        attackType: 'lil weapon'
+        
 
     },
 
@@ -27,15 +31,18 @@ const fighters = {
             x: 270, // adjust position accordingly based on rival location
             y: 340
         },
-        img: weaponImg,
+        img:{
+            src: 'assets-prova/embySprite.png'
+        },
         frames: {
             max:4, //crop pic to 4
             hold: 15
         },
         animate: true,
-        isRival: false, //not sure abt thi
+        isRival: false,
         name: 'UR POKEMON',
-        attacks: [attacks.TACKLE, attacks.THROW]
+        attacks: [attacks.TACKLE, attacks.THROW],
+        attackType: 'rawrier xd'
     }
     
 }

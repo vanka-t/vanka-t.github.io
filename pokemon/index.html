@@ -41,7 +41,8 @@
             left: 0;
             bottom: 0;
             opacity: 0;
-            pointer-events: none; "
+            pointer-events: none; 
+            z-index: 10;"
             ></div>
 
             <!--<canvas></canvas>-->
@@ -49,6 +50,7 @@
         
 
         <canvas width="1024" height="576"></canvas>
+        <div id="userInterface" style="display:none" >
         <!--ENEMY CHAR INFO-->
         <div style="
         background-color: white;
@@ -59,7 +61,6 @@
         border: 4px black solid;
         position: absolute;
         padding: 15px;
-        
         ">
         <h1 style="font-size: 20px;"> Enemy </h1>
         <!--ENEMY HP BAR-->
@@ -83,7 +84,8 @@
                         <!--PLAYER HP BAR-->
                         <div style="position: relative">
                             <div style="background-color: white; height: 5px; margin-top: 10px;"></div>
-                            <div id="player-hp" style="background-color: green; height: 5px; position:absolute; right:0; top:0; left:0"></div></div>
+                            <div id="player-hp" style="background-color: green; height: 5px; position:absolute; right:0; top:0; left:0"></div>
+                        </div>
                         </div>
 
             <!--BATTLE ATTACK OPTIONS-->
@@ -133,25 +135,34 @@
             justify-content: center; 
             width: 33.33%;
             border-left: 3px black solid"
-            ><h1 style="font-size: 20px;"> Attack Type</h1> </div>
+            ><h1 id="attack-type" style="font-size: 20px;">Attack Type</h1> </div>
             </div> 
                     
         </div>
+        </div>
         
         
-       
-        
-        
+       <!--howler (audio) library-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!--gsap (transitions) library-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js" integrity="sha512-VEBjfxWUOyzl0bAwh4gdLEaQyDYPvLrZql3pw1ifgb6fhEvZl9iDDehwHZ+dsMzA0Jfww8Xt7COSZuJ/slxc4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
+        <!--data-->
+        <script src="data/audio.js"></script>
         <script src="data/collisions.js"></script>
         <script src="data/battleZone.js"></script>
         <script src="data/attacks.js"></script>
-        <script src="fighters.js"></script>
-
+        
+        <!--game code-->
         <script src="classes.js"></script>
         <script src="basicSettings.js"></script>
-        <script src="battleTime.js"></script>
+        
+        <script src="fighters.js"></script>
+        
+        
+        
         <script src="game.js"></script>
+        <script src="battleTime.js"></script>
         
     </body>
 

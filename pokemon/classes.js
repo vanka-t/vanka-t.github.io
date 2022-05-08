@@ -1,28 +1,31 @@
+pixels = 40.5 //pixel size of tiles after zooming in at 400% == x(original pixels) * 4 (400%)
+
 class Sprite { //character movement
-    constructor({position, velocity, img, frames = {max: 1, hold:10}, sprites, animate=false}) {
+    constructor({position, velocity, img, frames = {max: 1, hold:10}, sprites, animate=false, attackType}) {
         this.position = position //position
-        this.img = img 
+        this.img = new Image()
         this.frames = {...frames, val: 0, elapsed:0}
         this.img.onload = () => {
             this.width = this.img.width / this.frames.max
             this.height = this.img.height 
-            console.log(this.width, this.height)
+            //console.log(this.width, this.height)
 
         }
-        //this.moving = false //looping motion when moving
+        this.img.src = img.src
         this.animate = animate // to loop sprites that dont need keyPressed to make them move, but move automatically
         this.sprites = sprites //changing between sections of sprite sheet (left right up down etc)
         this.opacity = 1
-        
+        this.attackType = attackType  
 
     }
 
     draw() {
         c.save()//everything between this and c.restore is a global variable that affects all
-        c.globalAlpha = this.opacity
+        
         c.translate(this.position.x + this.width/2, this.position.y + this.height/2) //ala p5 -- moves canvas point to center of weapon
         c.rotate(this.rotation) //1 radians
         c.translate(-this.position.x - this.width/2, -this.position.y - this.height/2) //rotate everything back
+        c.globalAlpha = this.opacity
         //c.drawImage(this.img,this.position.x, this.position.y)// change starting position of background
         c.drawImage(
             this.img,
@@ -68,7 +71,6 @@ class Sprite { //character movement
     //     }
     // }
 }
-pixels = 40.5 //pixel size of tiles after zooming in at 400% == x(original pixels) * 4 (400%)
 
 class Boundary {
     static width = pixels
@@ -88,7 +90,7 @@ class Boundary {
 class Monster extends Sprite {
     constructor({position, velocity, img, frames = {max: 1, hold:10}, sprites, animate=false, isRival = false, rotation =0, name, attacks}){
         super({ //follows parent params
-            position, velocity, img, frames, sprites, animate
+            position, velocity, img, frames, sprites, animate, rotation
 
         })
         this.health = 100 //max health hp bar
@@ -97,22 +99,32 @@ class Monster extends Sprite {
         this.name = name
         this.attacks = attacks
     }
+    faint(){
+        document.querySelector('#dialogue-box').innerHTML = this.name + 'FAINTED!' //formatting
+        gsap.to(this.position, { //smoothly falls
+            y: this.position.y + 20
+        })
+        gsap.to(this, { //smoothly disappears
+            opacity: 0
+        })
+        audio.victory.play()
+    }
     attack({attack, recipient, renderedSprites}){
         document.querySelector('#dialogue-box').style.display = 'block' //show dialogue
-        document.querySelector('#dialogue-box').innerHTML = this.name + ' USED ' + attack.name + '!' //formatting
+        document.querySelector('#dialogue-box').innerHTML = this.name + ' USED ' //+ attack.name + '!' //formatting
         
-        let hpBar = '#player-hp'
-        if (this.isRival) {hpBar = '#player-hp'} else {hpBar = '#rival-hp'}
+        let hpBar = '#rival-hp'
+        if (this.isRival) {hpBar = '#player-hp'} 
         let rotation = 5
         if (this.isRival) {
             rotation = -5
         }
-        this.health -= attack.damage //sa her q e gjun te ulet score repeatedly --declaring health points here so taht its updated during loops
+        recipient.health -= attack.damage //sa her q e gjun te ulet score repeatedly --declaring health points here so taht its updated during loops
                
 
         switch (attack.name) { 
             case 'THROW':
-                
+                audio.initThrowBallSound.play()
                 const throwBallImg = new Image()
                 throwBallImg.src = 'assets-prova/bubble-throw.png'
                 const throwBall = new Sprite({
@@ -136,9 +148,10 @@ class Monster extends Sprite {
                     x: recipient.position.x,
                     y: recipient.position.y,
                     onComplete: () =>{
+                        audio.throwBallSound.play()
                         //shake enemy after being hit w throwball
                         gsap.to(hpBar,{
-                            width: this.health - attack.damage + '%'
+                            width: recipient.health + '%'
                             
                         })
                         gsap.to(recipient.position, { //MOVEMENT of enemy when attacked
@@ -170,23 +183,24 @@ class Monster extends Sprite {
       
 
         timeline.to(this.position, { //moving(vrull) when ur about to attack 
-            x: this.position.x - movingDist,
+            x: this.position.x - movingDist
             //duration: 0.05
         }).to(this.position, {
             x: this.position.x + movingDist*2, //go right 40 px -- attacking
             duration: 0.09, //faster motion
             onComplete: () => {
+                audio.tackleSound.play()
 
                 //lower enemy hp bar
                 console.log("hp bar:", hpBar)
                 console.log("recipient",recipient)
-                console.log("hp health:", this.health)
-                console.log("attack.damage",this.health - attack.damage )
+                console.log("hp health:", recipient.health)
+                console.log("attack.damage",recipient.health )
                 
                 
                 gsap.to(hpBar,{
                     
-                    width: this.health - attack.damage + '%'
+                    width: recipient.health  + '%'
                     
                 })
 
@@ -211,5 +225,6 @@ class Monster extends Sprite {
         
         
     }
+ 
 
 }

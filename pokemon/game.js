@@ -1,5 +1,52 @@
-console.log(gsap)// to see library references
+//console.log(gsap)// to see library references
+const canvas = document.querySelector('canvas')
+const c = canvas.getContext('2d') //ctx = context
+audio.Map.play()
+canvas.width = 1024
+canvas.height = 576
 
+const boundaries = []
+
+c.fillStyle = 'blue'
+c.fillRect(0,0,canvas.width,canvas.height);
+
+const img = new Image()
+img.src = 'assets-prova/map.png'
+
+const playerImg = new Image() //FRONT CHAR
+playerImg.src = 'assets-prova/char2-front.png' 
+
+const playerUpImg = new Image() //BACK CHAR
+playerUpImg.src = 'assets-prova/char2-back.png' 
+
+const playerDownImg = new Image() //FRONT CHAR
+playerDownImg.src = 'assets-prova/char2-front.png' 
+
+const playerLeftImg = new Image() //LEFT CHAR
+playerLeftImg.src = 'assets-prova/char2-left.png' 
+
+const playerRightImg = new Image() //LEFT CHAR
+playerRightImg.src = 'assets-prova/char2-right.png' 
+
+let lastKey = '' //empty str for memory key
+
+const foregroundImg = new Image() //FRONT CHAR
+foregroundImg.src = 'assets-prova/foreground.png' 
+
+
+const collisionsMap = []
+for (let i = 0; i<collisions.length; i+= 70){ //70 bc its the map tile width!!  
+   collisionsMap.push(collisions.slice(i, i+70))
+}
+
+const battleZoneMap = []
+for (let i = 0; i<battleZoneData.length; i+= 70){ //70 bc its the map tile width!!  
+   battleZoneMap.push(battleZoneData.slice(i, i+70))
+}
+const offset = { //syncing background + collisions pos
+   x: -825,
+   y: -335 
+}
 
 
 
@@ -133,6 +180,9 @@ function animate() {
             overlappingArea > player.width * player.height /2 &&//overlaping area between player n battlezone when player is on top -- not necessary code but makes it more realistic
             Math.random() < 0.1 //10% chance that battle occurs
             ) { 
+                audio.Map.stop() //remove background music
+                audio.initBattle.play()
+                audio.battle.play()
                 battle.initiated = true
                 window.cancelAnimationFrame(animationId) //removes map n everything from screen
                 gsap.to('#overlappingDiv', {
@@ -145,6 +195,7 @@ function animate() {
                             opacity:1, // starts battle screen flash
                             duration : 0.5, //--ease in
                             onComplete(){
+                                initBattle();
                                 battleTime(); //calls battle scene
                                 gsap.to('#overlappingDiv', {
                                     opacity:0, // removes flash 
@@ -158,7 +209,7 @@ function animate() {
                     }
                 })
                 
-                console.log("battle zone collision!")
+                //console.log("battle zone collision!")
                 break
             }
         }
@@ -313,5 +364,6 @@ window.addEventListener('keyup', (e) => { //equivalent to mouseReleased
             break
     }
 }) 
-//animate();
-battleTime();
+animate();
+//initBattle();
+//battleTime();
