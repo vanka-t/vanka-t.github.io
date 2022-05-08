@@ -1,11 +1,43 @@
 //console.log(gsap)// to see library references
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d') //ctx = context
-audio.Map.play()
+
 canvas.width = 1024
 canvas.height = 576
 
+const collisionsMap = []
+for (let i = 0; i<collisions.length; i+= 70){ //70 bc its the map tile width!!  
+   collisionsMap.push(collisions.slice(i, i+70))
+}
+
+const battleZoneMap = []
+for (let i = 0; i<battleZoneData.length; i+= 70){ //70 bc its the map tile width!!  
+   battleZoneMap.push(battleZoneData.slice(i, i+70))
+}
+
 const boundaries = []
+const offset = { //syncing background + collisions pos
+    x: -825,
+    y: -335 
+ }
+
+collisionsMap.forEach((row, i ) => {
+    row.forEach((symbol, j) => { //j = index of row currently loopin over
+        if (symbol > 0)  {
+            boundaries.push(
+                new Boundary({
+                    position: {
+                        x: j * Boundary.width + offset.x,// -210, //found in static width //210 is from bad previous programming? ur not supposed to need it but u fucked up somewhere so now ur left addin extra space manually
+                        y: i * Boundary.height + offset.y //-100
+            }}))
+        
+        }
+    })
+})
+
+const battleZone = []
+//audio.Map.play()
+
 
 c.fillStyle = 'blue'
 c.fillRect(0,0,canvas.width,canvas.height);
@@ -34,37 +66,12 @@ const foregroundImg = new Image() //FRONT CHAR
 foregroundImg.src = 'assets-prova/foreground.png' 
 
 
-const collisionsMap = []
-for (let i = 0; i<collisions.length; i+= 70){ //70 bc its the map tile width!!  
-   collisionsMap.push(collisions.slice(i, i+70))
-}
-
-const battleZoneMap = []
-for (let i = 0; i<battleZoneData.length; i+= 70){ //70 bc its the map tile width!!  
-   battleZoneMap.push(battleZoneData.slice(i, i+70))
-}
-const offset = { //syncing background + collisions pos
-   x: -825,
-   y: -335 
-}
 
 
 
-collisionsMap.forEach((row, i ) => {
-    row.forEach((symbol, j) => { //j = index of row currently loopin over
-        if (symbol > 0)  {
-            boundaries.push(
-                new Boundary({
-                    position: {
-                        x: j * Boundary.width + offset.x,// -210, //found in static width //210 is from bad previous programming? ur not supposed to need it but u fucked up somewhere so now ur left addin extra space manually
-                        y: i * Boundary.height + offset.y //-100
-            }}))
-        
-        }
-    })
-})
 
-const battleZone = []
+
+
 battleZoneMap.forEach((row, i ) => {
     row.forEach((symbol, j) => { //j = index of row currently loopin over
         if (symbol > 0)  {
@@ -142,6 +149,7 @@ const movables = [background, ...boundaries, foreground, ...battleZone] //dots h
 const battle = {
     initiated: false
 }
+
 function animate() {
     const animationId = window.requestAnimationFrame(animate) 
     background.draw()
@@ -364,6 +372,13 @@ window.addEventListener('keyup', (e) => { //equivalent to mouseReleased
             break
     }
 }) 
-animate();
+let clicked = false
+addEventListener('click', ()=>{
+    if (!clicked) {
+        audio.Map.play()
+        clicked = true
+    }
+})
+//animate();
 //initBattle();
 //battleTime();

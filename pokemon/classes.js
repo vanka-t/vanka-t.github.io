@@ -1,7 +1,7 @@
 pixels = 40.5 //pixel size of tiles after zooming in at 400% == x(original pixels) * 4 (400%)
 
 class Sprite { //character movement
-    constructor({position, velocity, img, frames = {max: 1, hold:10}, sprites, animate=false, attackType}) {
+    constructor({position, velocity, img, frames = {max: 1, hold:10}, sprites, animate=false, rotation = 0}){//, attackType}) {
         this.position = position //position
         this.img = new Image()
         this.frames = {...frames, val: 0, elapsed:0}
@@ -15,7 +15,8 @@ class Sprite { //character movement
         this.animate = animate // to loop sprites that dont need keyPressed to make them move, but move automatically
         this.sprites = sprites //changing between sections of sprite sheet (left right up down etc)
         this.opacity = 1
-        this.attackType = attackType  
+        //this.attackType = attackType 
+        this.rotation = rotation 
 
     }
 
@@ -46,7 +47,7 @@ class Sprite { //character movement
 
         if (!this.animate) return //if moving == True, return
             if (this.frames.max > 1) {  //slow down loop animation
-                this.frames.elapsed += 1
+                this.frames.elapsed ++
             }
             if (this.frames.elapsed % this.frames.hold === 0){  //"hold == rate of speed of animation
                 if (this.frames.val  < this.frames.max - 1){
@@ -72,20 +73,6 @@ class Sprite { //character movement
     // }
 }
 
-class Boundary {
-    static width = pixels
-    static height = pixels 
-    constructor({position}) {
-        this.position = position
-        this.width = pixels 
-        this.height = pixels 
-    }
-
-    draw() {
-        c.fillStyle = ' rgba(0,0,0,0)'//'black'
-        c.fillRect(this.position.x, this.position.y, this.width,this.height)//this.width, this.height)
-    }
-}
 
 class Monster extends Sprite {
     constructor({position, velocity, img, frames = {max: 1, hold:10}, sprites, animate=false, isRival = false, rotation =0, name, attacks}){
@@ -111,7 +98,7 @@ class Monster extends Sprite {
     }
     attack({attack, recipient, renderedSprites}){
         document.querySelector('#dialogue-box').style.display = 'block' //show dialogue
-        document.querySelector('#dialogue-box').innerHTML = this.name + ' USED ' //+ attack.name + '!' //formatting
+        document.querySelector('#dialogue-box').innerHTML = this.name + ' USED ' + attack.name + '!' //formatting
         
         let hpBar = '#rival-hp'
         if (this.isRival) {hpBar = '#player-hp'} 
@@ -138,7 +125,7 @@ class Monster extends Sprite {
                         hold: 15
                     },
                     animate: true,
-                    rotation: 5 //rotates  1 radians when rthown off
+                    rotation //rotates  1 radians when rthown off
                 })
 
                 renderedSprites.splice(1,0, throwBall) //like python list.insert -- adding throwball in idx 1 of array so that its rendered appropriately//also 0 cause were not replacing anything
@@ -147,7 +134,7 @@ class Monster extends Sprite {
                 gsap.to(throwBall.position, {
                     x: recipient.position.x,
                     y: recipient.position.y,
-                    onComplete: () =>{
+                    onComplete: () => {
                         audio.throwBallSound.play()
                         //shake enemy after being hit w throwball
                         gsap.to(hpBar,{
@@ -221,10 +208,28 @@ class Monster extends Sprite {
             x: this.position.x, //player returns to roiginal pos after attacking
             //duration: 0.05
         })
+        break
         }
+        
         
         
     }
  
 
+}
+
+
+class Boundary {
+    static width = pixels
+    static height = pixels 
+    constructor({position}) {
+        this.position = position
+        this.width = pixels 
+        this.height = pixels 
+    }
+
+    draw() {
+        c.fillStyle = ' rgba(0,0,0,0)'//'black'
+        c.fillRect(this.position.x, this.position.y, this.width,this.height)//this.width, this.height)
+    }
 }
