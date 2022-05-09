@@ -63,12 +63,10 @@ function initBattle(){ //inititalizing battle
                         }
                     })
                 })
-                
-    
             }
     
     
-            const randomAttack = rival.attacks[Math.floor[Math.random() * rival.attacks.length]] //randomize which attack is used (Math.floor = python's round())
+            const randomAttack = rival.attacks[Math.floor(Math.random() * rival.attacks.length)] //randomize which attack is used (Math.floor = python's round())
             queue.push(() => {
                 rival.attack({
                     attack: randomAttack,
