@@ -1,3 +1,6 @@
+
+
+
 const battleBackImg = new Image() //BATTLE BACKGROUND
 battleBackImg.src = 'assets-prova/battleGround.png'
 
@@ -7,8 +10,9 @@ const battleBack  = new Sprite({position: {
 },
 img: battleBackImg
 })
-let weapon //declaring it here so it refernces function --> program runs the same no matter how many times u enter battleZone in one game
 let rival
+let weapon //declaring it here so it refernces function --> program runs the same no matter how many times u enter battleZone in one game
+
 let renderedSprites 
 let battleTimeId //decclare so its easier to take the whole battle scene in and out of game
 let queue 
@@ -22,6 +26,7 @@ function initBattle(){ //inititalizing battle
     rival = new Monster(fighters.Rival)
     renderedSprites = [rival, weapon]//putting rival before weapon so weapon renders last -- so it + fireball show up on top of canvas
     queue = []
+    
     weapon.attacks.forEach((attack) => {
         const button  = document.createElement('button')
         button.innerHTML = attack.name //BUTTON
@@ -40,12 +45,14 @@ function initBattle(){ //inititalizing battle
             if (rival.health <= 0) { //only fights while still having health points
                 queue.push(() => {
                     rival.faint()
+
                 })
                 queue.push(() => {
                     gsap.to('#overlappingDiv', { // game over fade into black
                         opacity: 1,
                         onComplete: ()=> {
                             cancelAnimationFrame(battleTimeId)
+                            audio.battle.stop()
                             animate() //back to game
                             document.querySelector('#userInterface').style.display = 'none'
                             gsap.to('#overlappingDiv', { //remove transition frame
@@ -122,7 +129,7 @@ animate()
 
 
 document.querySelector('#dialogue-box').addEventListener('click', (e) => { //e = event object inaide of it
-    if(queue.length >1){ //if sums been added -- aka attack
+    if(queue.length >0){ //if sums been added -- aka attack
         queue[0]() //call attack
         queue.shift()//queue is reset after action
     } else {

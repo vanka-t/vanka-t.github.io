@@ -39,8 +39,8 @@ const battleZone = []
 //audio.Map.play()
 
 
-c.fillStyle = 'blue'
-c.fillRect(0,0,canvas.width,canvas.height);
+// c.fillStyle = 'blue'
+//c.fillRect(0,0,canvas.width,canvas.height);
 
 const img = new Image()
 img.src = 'assets-prova/map.png'
@@ -243,7 +243,7 @@ function animate() {
         }
         if (moving) {
             movables.forEach((movable) => {
-                movable.position.y +=3
+                movable.position.y +=7
             })
         }
     } 
@@ -268,7 +268,7 @@ function animate() {
         }
         if (moving) {
             movables.forEach((movable) => {
-                movable.position.y -=3
+                movable.position.y -=7
             })
         }
   
@@ -295,7 +295,7 @@ function animate() {
         }
         if (moving) {
             movables.forEach((movable) => {
-                movable.position.x +=3
+                movable.position.x +=7
             })
         }
         
@@ -323,7 +323,7 @@ function animate() {
         }
         if (moving) {
             movables.forEach((movable) => {
-                movable.position.x -=3
+                movable.position.x -=7
             })
         }
        

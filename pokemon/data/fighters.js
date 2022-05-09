@@ -5,6 +5,25 @@
 
 
 const fighters = {
+    Weapon:{
+        position: {
+            x: 270, // adjust position accordingly based on rival location
+            y: 340
+        },
+        img:{
+            src: 'assets-prova/embySprite.png'
+        },
+        frames: {
+            max:4, //crop pic to 4
+            hold: 15
+        },
+        animate: true,
+        isRival: false,
+        name: 'UR POKEMON',
+        attacks: [attacks.TACKLE, attacks.THROW]
+        
+    },
+
     Rival:{
         position: {
             x: 730, // adjust position accordingly based on rival location
@@ -21,28 +40,9 @@ const fighters = {
         isRival: true, //enables  hp bar settings to get attacked
         name: 'ENEMY',
         attacks: [attacks.TACKLE, attacks.THROW],
-        attackType: 'lil weapon'
+        //attackType: 'lil weapon'
         
 
-    },
-
-    Weapon:{
-        position: {
-            x: 270, // adjust position accordingly based on rival location
-            y: 340
-        },
-        img:{
-            src: 'assets-prova/embySprite.png'
-        },
-        frames: {
-            max:4, //crop pic to 4
-            hold: 15
-        },
-        animate: true,
-        isRival: false,
-        name: 'UR POKEMON',
-        attacks: [attacks.TACKLE, attacks.THROW],
-        attackType: 'rawrier xd'
     }
     
 }

@@ -58,19 +58,6 @@ class Sprite { //character movement
             }
 
     }
-
-    // motion(){ //REMOVE ANIMATE SI PARAM N JUST DO THIS IF NOT NECESSARY
-    //     if (this.frames.max > 1) {  //slow down loop animation
-    //         this.frames.elapsed += 1
-    //     }
-    //     if (this.frames.elapsed % 10 === 0){ 
-    //         if (this.frames.val  < this.frames.max - 1){
-    //             this.frames.val ++ //going through the sprite sheet
-    //         } else {
-    //             this.frames.val = 0 //loops thru the sheet
-    //         }
-    //     }
-    // }
 }
 
 
@@ -97,119 +84,126 @@ class Monster extends Sprite {
         audio.victory.play()
     }
     attack({attack, recipient, renderedSprites}){
-        document.querySelector('#dialogue-box').style.display = 'block' //show dialogue
-        document.querySelector('#dialogue-box').innerHTML = this.name + ' USED ' + attack.name + '!' //formatting
-        
-        let hpBar = '#rival-hp'
-        if (this.isRival) {hpBar = '#player-hp'} 
-        let rotation = 5
-        if (this.isRival) {
-            rotation = -5
-        }
-        recipient.health -= attack.damage //sa her q e gjun te ulet score repeatedly --declaring health points here so taht its updated during loops
-               
-
-        switch (attack.name) { 
-            case 'THROW':
-                audio.initThrowBallSound.play()
-                const throwBallImg = new Image()
-                throwBallImg.src = 'assets-prova/bubble-throw.png'
-                const throwBall = new Sprite({
-                    position: {
-                        x: this.position.x, // adjust position accordingly based on rival location
-                        y: this.position.y
-                    },
-                    img: throwBallImg,
-                    frames: {
-                        max:4, //crop pic to 4
-                        hold: 15
-                    },
-                    animate: true,
-                    rotation //rotates  1 radians when rthown off
-                })
-
-                renderedSprites.splice(1,0, throwBall) //like python list.insert -- adding throwball in idx 1 of array so that its rendered appropriately//also 0 cause were not replacing anything
-                //
-
-                gsap.to(throwBall.position, {
-                    x: recipient.position.x,
-                    y: recipient.position.y,
-                    onComplete: () => {
-                        audio.throwBallSound.play()
-                        //shake enemy after being hit w throwball
-                        gsap.to(hpBar,{
-                            width: recipient.health + '%'
-                            
-                        })
-                        gsap.to(recipient.position, { //MOVEMENT of enemy when attacked
-                            x: recipient.position.x + 10, //enemy jerks back
-                            yoyo: true, //move back n forth according to x
-                            duration: 0.1, 
-                            repeat: 5 //repeat 5 times to imitate pokemon style
-                        })
-                        gsap.to(recipient, { //makes enemy invisible when hit n normal again (for dramatic og pokemon effect)
-                            opacity: 0,
-                            yoyo:true,
-                            duration:0.2,
-                            repeat:3
-                        })
-                        //remove throwBall
-                        renderedSprites.splice(1,1) //from idx 1 of array remove 1 element -- removes throwBall from canvas
-                    }
-                })
-
-
-                break
-            case 'TACKLE': //if choosing tackle, run this
-            document.querySelector('#dialogue-box').innerHTML = 'TACKLE TIME WOOOO'
-                const timeline = gsap.timeline()
-                let movingDist = 20
-                if(this.isRival) { //if its true that this is the rival, make it move back
-                movingDist = -20
-                }
-      
-
-        timeline.to(this.position, { //moving(vrull) when ur about to attack 
-            x: this.position.x - movingDist
-            //duration: 0.05
-        }).to(this.position, {
-            x: this.position.x + movingDist*2, //go right 40 px -- attacking
-            duration: 0.09, //faster motion
-            onComplete: () => {
-                audio.tackleSound.play()
-
-                //lower enemy hp bar
-                console.log("hp bar:", hpBar)
-                console.log("recipient",recipient)
-                console.log("hp health:", recipient.health)
-                console.log("attack.damage",recipient.health )
-                
-                
-                gsap.to(hpBar,{
-                    
-                    width: recipient.health  + '%'
-                    
-                })
-
-                gsap.to(recipient.position, { //MOVEMENT of enemy when attacked
-                    x: recipient.position.x + 10, //enemy jerks back
-                    yoyo: true, //move back n forth according to x
-                    duration: 0.1, 
-                    repeat: 5 //repeat 5 times to imitate pokemon style
-                })
-                gsap.to(recipient, { //makes enemy invisible when hit n normal again (for dramatic og pokemon effect)
-                    opacity: 0,
-                    yoyo:true,
-                    duration:0.2,
-                    repeat:3
-                })
+        if (attack !== undefined) {
+            document.querySelector('#dialogue-box').style.display = 'block' //show dialogue
+            document.querySelector('#dialogue-box').innerHTML = 
+            this.name + ' USED ' + attack.name + '!' //formatting
+            recipient.health -= attack.damage //sa her q e gjun te ulet score repeatedly --declaring health points here so taht its updated during loops
+           
+            
+            let hpBar = '#rival-hp'
+            if (this.isRival) {hpBar = '#player-hp'} 
+            let rotation = 5
+            if (this.isRival) {
+                rotation = -5
             }
-        }).to(this.position, {
-            x: this.position.x, //player returns to roiginal pos after attacking
-            //duration: 0.05
-        })
-        break
+    
+    
+            switch (attack.name) { 
+                case 'THROW':
+                    audio.initThrowBallSound.play()
+                   
+                    const throwBallImg = new Image()
+                    throwBallImg.src = 'assets-prova/bubble-throw.png'
+                    const throwBall = new Sprite({
+                        position: {
+                            x: this.position.x, // adjust position accordingly based on rival location
+                            y: this.position.y
+                        },
+                        img: throwBallImg,
+                        frames: {
+                            max:4, //crop pic to 4
+                            hold: 15
+                        },
+                        animate: true,
+                        rotation //rotates  1 radians when rthown off
+                    })
+    
+                    renderedSprites.splice(1,0, throwBall) //like python list.insert -- adding throwball in idx 1 of array so that its rendered appropriately//also 0 cause were not replacing anything
+                    //
+    
+                    gsap.to(throwBall.position, {
+                        x: recipient.position.x,
+                        y: recipient.position.y,
+                        onComplete: () => {
+                            audio.throwBallSound.play()
+                            //shake enemy after being hit w throwball
+                            gsap.to(hpBar,{
+                                width: recipient.health + '%'
+                                
+                            })
+                            gsap.to(recipient.position, { //MOVEMENT of enemy when attacked
+                                x: recipient.position.x + 10, //enemy jerks back
+                                yoyo: true, //move back n forth according to x
+                                duration: 0.1, 
+                                repeat: 5 //repeat 5 times to imitate pokemon style
+                            })
+                            gsap.to(recipient, { //makes enemy invisible when hit n normal again (for dramatic og pokemon effect)
+                                opacity: 0,
+                                yoyo:true,
+                                duration:0.2,
+                                repeat:3
+                            })
+                            //remove throwBall
+                            renderedSprites.splice(1,1) //from idx 1 of array remove 1 element -- removes throwBall from canvas
+                        }
+                    })
+    
+    
+                    break
+                case 'TACKLE': //if choosing tackle, run this
+                document.querySelector('#dialogue-box').innerHTML = 'TACKLE TIME WOOOO'
+                    const timeline = gsap.timeline()
+                    let movingDist = 20
+                    if(this.isRival) { //if its true that this is the rival, make it move back
+                    movingDist = -20
+                    }
+          
+    
+            timeline.to(this.position, { //moving(vrull) when ur about to attack 
+                x: this.position.x - movingDist
+                //duration: 0.05
+            }).to(this.position, {
+                x: this.position.x + movingDist*2, //go right 40 px -- attacking
+                duration: 0.09, //faster motion
+                onComplete: () => {
+                    audio.tackleSound.play()
+    
+                    //lower enemy hp bar
+                    console.log("hp bar:", hpBar)
+                    console.log("recipient",recipient)
+                    console.log("hp health:", recipient.health)
+                    console.log("attack.damage",recipient.health )
+                    
+                    
+                    gsap.to(hpBar,{
+                        
+                        width: recipient.health  + '%'
+                        
+                    })
+    
+                    gsap.to(recipient.position, { //MOVEMENT of enemy when attacked
+                        x: recipient.position.x + 10, //enemy jerks back
+                        yoyo: true, //move back n forth according to x
+                        duration: 0.1, 
+                        repeat: 5 //repeat 5 times to imitate pokemon style
+                    })
+                    gsap.to(recipient, { //makes enemy invisible when hit n normal again (for dramatic og pokemon effect)
+                        opacity: 0,
+                        yoyo:true,
+                        duration:0.2,
+                        repeat:3
+                    })
+                }
+            }).to(this.position, {
+                x: this.position.x, //player returns to roiginal pos after attacking
+                //duration: 0.05
+            })
+            break
+            }
+    
         }
+       
         
         
         
