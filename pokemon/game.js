@@ -1,3 +1,7 @@
+//almost all the logistics in this game were learnt by chrisCourses!! Here is a link to his website:
+//https://chriscourses.com/courses
+
+
 //console.log(gsap)// to see library references
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d') //ctx = context
