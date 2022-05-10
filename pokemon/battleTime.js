@@ -17,6 +17,7 @@ let renderedSprites
 let battleTimeId //decclare so its easier to take the whole battle scene in and out of game
 let queue 
 function initBattle(){ //inititalizing battle
+    audio.Map.stop()
     document.querySelector('#userInterface').style.display = 'block'
     document.querySelector('#dialogue-box').style.display = 'none'
     document.querySelector('#rival-hp').style.width = '100%' //sets scores back to 100%

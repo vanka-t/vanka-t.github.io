@@ -152,7 +152,7 @@ class Monster extends Sprite {
     
                     break
                 case 'TACKLE': //if choosing tackle, run this
-                document.querySelector('#dialogue-box').innerHTML = 'TACKLE TIME WOOOO'
+                //document.querySelector('#dialogue-box').innerHTML = 'TACKLE TIME WOOOO'
                     const timeline = gsap.timeline()
                     let movingDist = 20
                     if(this.isRival) { //if its true that this is the rival, make it move back
