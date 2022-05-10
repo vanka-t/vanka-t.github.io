@@ -167,7 +167,7 @@ function animate() {
     })
 
     player.draw()
-    foreground.draw()
+    //foreground.draw()
     let moving = true 
     player.animate = false //by default player doesnt move when staying in place
     if (battle.initiated) {return}
@@ -247,7 +247,7 @@ function animate() {
         }
         if (moving) {
             movables.forEach((movable) => {
-                movable.position.y +=7
+                movable.position.y +=4
             })
         }
     } 
@@ -272,7 +272,7 @@ function animate() {
         }
         if (moving) {
             movables.forEach((movable) => {
-                movable.position.y -=7
+                movable.position.y -=4
             })
         }
   
@@ -299,7 +299,7 @@ function animate() {
         }
         if (moving) {
             movables.forEach((movable) => {
-                movable.position.x +=7
+                movable.position.x +=4
             })
         }
         
@@ -327,7 +327,7 @@ function animate() {
         }
         if (moving) {
             movables.forEach((movable) => {
-                movable.position.x -=7
+                movable.position.x -=4
             })
         }
        
